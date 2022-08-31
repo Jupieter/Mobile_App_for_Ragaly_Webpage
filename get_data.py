@@ -1,11 +1,12 @@
+from unicodedata import name
 import pymysql
 
 
 class DB_questions():
 
-  def db_get():
+  def db_get(self):
     #database connection
-    mydb = pymysql.connect(
+    con = pymysql.connect(
       host="127.0.0.1",   
       port=3306,
       user="root",          
@@ -17,23 +18,36 @@ class DB_questions():
     #   user="appfejleszt", 
     #   passwd="nNe4rF#pH7gRQ", 
     #   database="ngwpragaly")
-    print(mydb)
-    return mydb
+    print(con)
+    return con
 
-  def post_titles(self): 
-    mydb = self.db_get() 
-    mycursor = mydb.cursor()
-    # sql =  mycursor.execute("SELECT post_title FROM wragalyp_posts WHERE post_type='revision' OR post_type='post' ")
-    sql = "SELECT post_content FROM wragalyp_posts WHERE id=42624 "
-    mycursor.execute(sql)
-    myresult = mycursor.fetchall()
+  def post_ids(self): 
+    rev = ""
+    rev_old = ""
+    con = self.db_get() 
+    cur = con.cursor()
+    sql =  "SELECT id, post_title, post_parent FROM wragalyp_posts WHERE post_type='revision' OR post_type='post' ORDER BY id DESC"
+    # sql = "SELECT post_title FROM wragalyp_posts WHERE id=42624 "
+    cur.execute(sql)
+    myresult = cur.fetchall()
 
+    # select the last revision posts
     htmls = []
     for x in myresult:
-      htmls.append(str(x))
-      # print(x)
+      rev = x[2]
+      if rev != rev_old and rev_old != x[0]:
+        rev_old = rev
+        htmls.append(x)
+        print(x[0], x[1], x[2])
+        
+      #for y in htmls:
+      #  print(y)
 
-# importing the library
+
+if __name__ == '__main__':
+    print('START MAIN')
+    db = DB_questions()
+    db.post_ids()
 
  
 

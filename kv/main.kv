@@ -1,20 +1,96 @@
+#:set btn_txt 0.45    # rapid change button text size, size_hint height everywhere
+#:set g_btn_txt 0.45
+#:set sz_hint_hight 0.3
+
+<PostCard@MDCard>
+    id: coffee_ware_card
+    on_pre_enter: 
+    size_hint: 0.95, 1
+    pos_hint: {"center_x": 0.5, "top": 1}
+    elevation: 25
+    padding: 0.02 * self.height
+    spacing:  0.02 * self.height
+    radius: 20
+    orientation: 'vertical'
+    line_color: (0, 0, 0, 1)
+
+    MDBoxLayout:
+        id: box_post
+        orientation: "horizontal"
+        padding: 0.01 * self.height
+        spacing: 0.01 * self.height
+
+        Image:
+            id: post_image
+            size_hint: 0.4, 1
+            # size: "100dp", "100dp"
+            source: "images/cimer.jpg"
+#
+        MDBoxLayout:
+            id: box_post_lbl
+            size_hint: 0.6, 1
+            orientation: "vertical"
+            padding: 0.01 * self.height
+            spacing: 0.01 * self.height
+#
+            MDLabel:
+                size_hint: (0.9, 0.6)
+                pos_hint: {'center_x': .5, "top": 1}
+                font_size: 0.3 * self.height
+                halign: "left"
+                text: "Post Title"
+
+            MDLabel:
+                size_hint: (0.9, 0.4)
+                pos_hint: {'center_x': .5, "top": 0.5}
+                font_size: 0.3 * self.height
+                halign: "right"
+                text: "Post Date"
+
 <ContentNavigationDrawer>
 
     ScrollView:
 
         MDList:
+            Image:
+                id: arms_img
+                size_hint: None, None
+                size: "80dp", "160dp"
+                source: "images/cimer.jpg"
 
             OneLineListItem:
-                text: "Screen 1"
+                text: "Hírek"
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "scr 1"
 
             OneLineListItem:
-                text: "Screen 2"
+                text: "Hirdetmények"
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "scr 2"
+
+            OneLineListItem:
+                text: "Elérhetőségünk"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 3"
+            
+            Image:
+                id: cup_img
+                size_hint: None, None
+                size: "100dp", "200dp"
+                
+            MDLabel:
+                text: "by Peter Jung"
+                font_style: "Button"
+                # pos_hint: {"top": 0.1}
+                font_size: self.width/20
+                halign: "right"
+                # size_hint_y: None
+                # height: self.texture_size[1]
+
+
 
 
 MDScreen:
@@ -23,7 +99,7 @@ MDScreen:
         id: toolbar
         pos_hint: {"top": 1}
         elevation: 10
-        title: "MDNavigationDrawer"
+        title: "Ragály Önkormányzati Hírek"
         left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
 
     MDNavigationLayout:
@@ -32,19 +108,86 @@ MDScreen:
         MDScreenManager:
             id: screen_manager
 
+            # SCREEN 1  -----------------------HÍREK-----------------------                        
             MDScreen:
                 name: "scr 1"
+                
+                MDCard:
+                    id: coffee_ware_card
+                    on_pre_enter: 
+                    size_hint: 0.95, 0.8
+                    pos_hint: {"center_x": 0.5, "top": 0.9}
+                    elevation: 25
+                    padding: 0.02 * self.height
+                    spacing:  0.02 * self.height
+                    radius: 20
+                    orientation: 'vertical'
+                    line_color: (0, 0, 0, 0.5)
 
-                MDLabel:
-                    text: "Screen 1"
-                    halign: "center"
+                    PostCard:
+                        id: post1
+                        
+                    PostCard:
+                        id: post2
+                        
+                    PostCard:
+                        id: post3
+                        
+                    PostCard:
+                        id: post4
+           
+               
+
+            # SCREEN 2  -----------------------HIRDETMÉNYEK-----------------------                        
 
             MDScreen:
                 name: "scr 2"
 
                 MDLabel:
-                    text: "Screen 2"
+                    text: "Screen 2"    
                     halign: "center"
+
+            # SCREEN 3  --------------------ELÉRHETŐSÉGÜNK--------------------------                        
+
+            MDScreen:
+                name: "scr 3"
+                # height: self.minimum_height
+                orientation: "vertical"
+
+                MDBoxLayout:
+                    id: box_scr3
+                    orientation: "vertical"
+                    padding: 0.01 * self.height
+                    spacing: 0.2 * self.height
+
+
+                    MDLabel:
+                        text: "Screen 3"    
+                        halign: "center"
+                        font_size: 0.2 * self.height
+
+                    MDLabel:
+                        markup: True
+                        halign: "left"
+                        text: "Amennyiben megkeresne bennünket, \n az alábbi elérhetőségeken léphet kapcsolatba az adatkezelővel."
+                        # font_size: btn_txt * self.height
+                    MDLabel:
+                        id: scr_adress
+                        markup: True
+                        halign: "left"
+                        text: "Cím"
+                        
+                        #font_size: btn_txt * self.height
+                    MDLabel:
+                        markup: True
+                        halign: "left"
+                        text: "Cím: 3724 Ragály, Rákóczi Ferenc út 16. "
+                        #font_size: btn_txt * self.height
+                    MDLabel:
+                        markup: True
+                        halign: "left"
+                        text: "[b]Telefon:[/b] (06–48) 354-001; (06-48) 504-201"
+                        #font_size: btn_txt * self.height
 
         MDNavigationDrawer:
             id: nav_drawer
