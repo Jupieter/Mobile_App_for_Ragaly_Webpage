@@ -1,4 +1,9 @@
 py -m venv venv
 python -m pip install mysql-connector-python
 py -m pip install --upgrade pip
+pip install kivy
+pip install beautifulsoup4
+
 pip freeze > requirements.txt 
+
+https://www.wampserver.com/en/download-wampserver-64bits/
