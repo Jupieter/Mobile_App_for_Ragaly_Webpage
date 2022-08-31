@@ -4,8 +4,17 @@ cwd = os.getcwd()
 # print(cwd)
 os.environ['KIVY_HOME'] = cwd + '/conf'
 
-from kivymd.app import MDApp
 from kivy.lang import Builder
+from kivy.properties import ObjectProperty
+from kivymd.app import MDApp
+from kivymd.uix.boxlayout import MDBoxLayout
+
+
+
+class ContentNavigationDrawer(MDBoxLayout):
+    screen_manager = ObjectProperty()
+    nav_drawer = ObjectProperty()
+
 
 class RagalyApp(MDApp):
 
