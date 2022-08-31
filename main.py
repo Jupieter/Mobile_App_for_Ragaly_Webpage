@@ -13,7 +13,7 @@ class RagalyApp(MDApp):
         print('Build 0')
         # self.icon = 'conf/icon/coffee-ante-porta-512.png'
         self.theme_cls.theme_style = "Light"
-        self.theme_cls.primary_palette = "Green"  # "Purple", "Red"
+        self.theme_cls.primary_palette = "Blue"  # "Purple", "Red"
         return Builder.load_file('kv/main.kv')
 
 if __name__ == '__main__':
