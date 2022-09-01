@@ -41,7 +41,7 @@ class DB_questions():
     myresult = myresult_in
     for x in myresult:
       rev = x[2]
-      if rev != rev_old and rev_old != x[0]:
+      if rev != rev_old and rev_old != x[0] and x[3] != "":
         rev_old = rev
         posts.append(x)
         i +=1
@@ -53,33 +53,32 @@ class DB_questions():
     ''' change the html <strong> to kivy [b] '''
     html_out1 = html_in.replace("</strong>", "[/b]")
     html_out = html_out1.replace("<strong>", "[b]")
-    print(html_out)
+    print("strong_murkup", html_out)
     return html_out
 
   def html_transform(self, posts_in):
     '''change al html post mark up to kivy mark up'''
     posts = posts_in
-    htmls = []
     for post in posts:
       html_act =post[3]
-      print("első: ",html_act)
+      # print("első: ",html_act)
       html_tr = self.strong_murkup(html_act)
+      print(post[1])
       # print("második: ", html_tr)
       post[3] = html_tr
-      print(post[3])
+      # print(post[3])
       print(post)
-      # htmls.append(html_act)
     return posts
 
 
   def runner(self):
     myresult = self.post_rev()
     posts = self.post_ids(myresult)
-    # htmls = self. strong_murkup(posts)
-    post1 = posts[0]
-    print(post1)
-    htmls = self. strong_murkup(posts)
-    print(htmls)
+    # for post in posts:
+    #   print(post[1])
+    htmls = self. html_transform(posts)
+    for x in htmls:
+      print(x)
 
 
 
