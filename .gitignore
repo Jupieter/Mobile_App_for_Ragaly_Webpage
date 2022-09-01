@@ -5,7 +5,7 @@ venv
 conf/logs
 conf/icon
 db.sqlite3
-/django
+ragaly.egg-info
 .DS_Store
 *.bat
 *.db
