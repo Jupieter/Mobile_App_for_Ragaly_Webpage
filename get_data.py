@@ -25,27 +25,63 @@ class DB_questions():
     '''get all posts from database'''
     con = self.db_get() 
     cur = con.cursor()
-    sql =  "SELECT id, post_title, post_parent, post_content FROM wragalyp_posts WHERE post_type='revision' OR post_type='post' ORDER BY id DESC"
-    # sql = "SELECT post_title FROM wragalyp_posts WHERE id=42624 "
+    sql =  """
+          SELECT id, post_title, post_parent, post_content 
+          FROM wragalyp_posts 
+          WHERE post_type='revision' OR post_type='post' 
+          ORDER BY post_parent ASC
+          """
+    # sql = "SELECT post_title FROM wragalyp_posts WHERE id=42624 " , id DESC
     cur.execute(sql)
     myresult = cur.fetchall()
-    return myresult
+    myresult_out = list(myresult)
+    return myresult_out
+  
+  def tuple_to_list(self, datas):
+    post_list = []
+    for data in datas:
+      x = list(data)
+      post_list.append(x)
+    return post_list
+
+
+  def zero_post_type(self, myresult_in):
+    '''change post_parent zero value to own id value'''
+    print(type(myresult_in))
+    for post in myresult_in:
+      if post[2] != 0:
+        break
+      elif post[2] == 0:
+        post[2] = post[0]
+        print("csere", post[0], post[2]) # type(post[2])
+    print("----------------------------------------------------------")
+    myresult_out = sorted(myresult_in, key=lambda x: x[0], reverse=True)
+    for post in myresult_out:
+      print("have zero? : ", post[0], post[2])
+    return myresult_out
+
 
   def post_ids(self, myresult_in):
     '''select the last post revision id'''
     rev = ""
     rev_old = ""
     i = 0
-    # select the last revision posts
-    posts = []
     myresult = myresult_in
     for x in myresult:
+      print(x[0],x[2])
+    sortol = sorted(myresult, key=lambda x: x[0])
+    for x in sortol:
+      print("na ez: ", x[0],x[2])
+    print("----------------------------------------------------------")
+    # select the last revision posts
+    posts = []
+    for x in myresult:
       rev = x[2]
-      if rev != rev_old and rev_old != x[0] and x[3] != "":
+      if rev != rev_old  and x[3] != "": # and rev_old != x[0]
         rev_old = rev
         posts.append(x)
         i +=1
-      #  print(x[0], x[1], x[2])
+        print("appendált: ",x[0], x[1], x[2])
     print(i)
     return posts    
 
@@ -73,12 +109,17 @@ class DB_questions():
 
   def runner(self):
     myresult = self.post_rev()
-    posts = self.post_ids(myresult)
+    post_lst = self.tuple_to_list(myresult)
+    post_zero = self.zero_post_type(post_lst)
+    
+
+    # posts = self.zero_post_type(myresult)
+    # posts = self.post_ids(myresult)
     # for post in posts:
-    #   print(post[1])
-    htmls = self. html_transform(posts)
-    for x in htmls:
-      print(x)
+    #   print(post[0:3])
+    # htmls = self. html_transform(posts)
+    # for x in htmls:
+    #   print(x)
 
 
 
