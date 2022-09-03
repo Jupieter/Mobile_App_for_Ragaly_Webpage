@@ -47,17 +47,16 @@ class DB_questions():
 
   def zero_post_type(self, myresult_in):
     '''change post_parent zero value to own id value'''
-    print(type(myresult_in))
     for post in myresult_in:
       if post[2] != 0:
         break
       elif post[2] == 0:
         post[2] = post[0]
-        print("csere", post[0], post[2]) # type(post[2])
+        # print("csere", post[0], post[2]) # type(post[2])
     print("----------------------------------------------------------")
     myresult_out = sorted(myresult_in, key=lambda x: x[0], reverse=True)
-    for post in myresult_out:
-      print("have zero? : ", post[0], post[2])
+    # for post in myresult_out:
+    #   print("have zero? : ", post[0], post[2])
     return myresult_out
 
 
@@ -66,60 +65,32 @@ class DB_questions():
     rev = ""
     rev_old = ""
     i = 0
-    myresult = myresult_in
-    for x in myresult:
-      print(x[0],x[2])
-    sortol = sorted(myresult, key=lambda x: x[0])
-    for x in sortol:
-      print("na ez: ", x[0],x[2])
+    # for x in myresult_in:
+    #   print(x[0],x[2])
     print("----------------------------------------------------------")
     # select the last revision posts
     posts = []
-    for x in myresult:
+    for x in myresult_in:
       rev = x[2]
-      if rev != rev_old  and x[3] != "": # and rev_old != x[0]
+      if rev != rev_old and rev_old != x[0] and x[3] != "": 
         rev_old = rev
         posts.append(x)
         i +=1
-        print("appendált: ",x[0], x[1], x[2])
-    print(i)
+        # print("appendált: ",x[0], x[1], x[2])
+    print("list no: ", i)
     return posts    
-
-  def strong_murkup(self, html_in):
-    ''' change the html <strong> to kivy [b] '''
-    html_out1 = html_in.replace("</strong>", "[/b]")
-    html_out = html_out1.replace("<strong>", "[b]")
-    print("strong_murkup", html_out)
-    return html_out
-
-  def html_transform(self, posts_in):
-    '''change al html post mark up to kivy mark up'''
-    posts = posts_in
-    for post in posts:
-      html_act =post[3]
-      # print("első: ",html_act)
-      html_tr = self.strong_murkup(html_act)
-      print(post[1])
-      # print("második: ", html_tr)
-      post[3] = html_tr
-      # print(post[3])
-      print(post)
-    return posts
-
 
   def runner(self):
     myresult = self.post_rev()
     post_lst = self.tuple_to_list(myresult)
     post_zero = self.zero_post_type(post_lst)
-    
-
-    # posts = self.zero_post_type(myresult)
-    # posts = self.post_ids(myresult)
+    posts = self.post_ids(post_zero)
     # for post in posts:
     #   print(post[0:3])
     # htmls = self. html_transform(posts)
     # for x in htmls:
     #   print(x)
+    return posts
 
 
 
