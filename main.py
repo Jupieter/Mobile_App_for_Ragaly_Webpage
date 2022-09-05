@@ -1,4 +1,5 @@
 import os
+import datetime
 os.environ['KIVY_NO_CONSOLELOG'] = '1'
 cwd = os.getcwd()
 # print(cwd)
@@ -23,25 +24,43 @@ class RagalyApp(MDApp):
     def __init__(self, **kwargs):
         super(RagalyApp, self).__init__(**kwargs)
         self.posts = []
-        self.max_post = 0
+        self.max_post = 4
         self.post_pos = 0
 
-    def four_news(self):
-        print("direction: ")
-        # pos_pos = self.post_pos + direction * 4
-        # if pos_pos < 2: pos_pos = 1
-        # elif pos_pos > self.max_post-3: pos_pos = self.max_post-3
-        # print(pos_pos)
+    def four_news(self, direction):
+        print("direction: ", direction)
+        self.post_pos += direction * 4
+        if self.post_pos >= (self.max_post-3): 
+            self.post_pos = self.max_post-4
+        if self.post_pos <= 0: 
+            self.post_pos = 0
+        if direction == 0:
+            self.post_pos = 0
+        print(self.post_pos)
+        # print(self.root.ids)
+        for pos in range(0,4,1):
+            card_id = "post" + str(pos+1)
+            post_id  = self.post_pos + pos
+            # rint(self.root.ids[card_id].ids["post_title"])
+            # self.root.ids[card_id].ids["post_title"].text = str(self.post_pos + pos)
+            p_title = self.posts[post_id][1]
+            self.root.ids[card_id].ids["post_title"].text = str(p_title)
+            p_date = self.posts[post_id][4].date()
+            print(p_date)
+            self.root.ids[card_id].ids["post_date"].text = str(p_date)
+            p_pict = self.posts[post_id][5]
+            print(p_pict)
 
         pass    
 
     def on_start(self):
-        # get_db = DB_questions()
-        # posts, self.max_post = get_db.runner()                 # All last revisioned post
-        # self.posts = transform.transform(posts) 
+        get_db = DB_questions()
+        posts, self.max_post = get_db.runner()                 # All last revisioned post
+        self.posts = transform.transform(posts) 
         # for post in self.posts:
         #     print(post)
-        print("max_post: ", self.max_post)
+        # print("max_post: ", self.max_post)
+        self.four_news(0)
 
 
     def build(self):

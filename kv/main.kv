@@ -25,15 +25,16 @@
             size_hint: 0.4, 1
             # size: "100dp", "100dp"
             source: "images/cimer.jpg"
-#
+
         MDBoxLayout:
             id: box_post_lbl
             size_hint: 0.6, 1
             orientation: "vertical"
             padding: 0.01 * self.height
             spacing: 0.01 * self.height
-#
+
             MDLabel:
+                id: post_title
                 size_hint: (0.9, 0.6)
                 pos_hint: {'center_x': .5, "top": 1}
                 font_size: 0.3 * self.height
@@ -41,6 +42,7 @@
                 text: "Post Title"
 
             MDLabel:
+                id: post_date
                 size_hint: (0.9, 0.4)
                 pos_hint: {'center_x': .5, "top": 0.5}
                 font_size: 0.3 * self.height
@@ -94,6 +96,7 @@
 
 
 MDScreen:
+    id: main_scr
 
     MDTopAppBar:
         id: toolbar
@@ -151,23 +154,23 @@ MDScreen:
                         font_size: 0.5* self.height
                         text: "Up"
                         value: 1
-                        on_release: print("BAROM", self)
+                        on_release: app.four_news(self.value)
                     MDFillRoundFlatButton:
                         id: post_home
                         size_hint: (1, 0.1)
                         pos_hint: {'center_x': .5, "top": 1}
                         font_size: 0.5* self.height
                         text: "Home"
-                        value: 1
-                        on_release: root.four_news()
+                        value: 0
+                        on_release: app.four_news(self.value)
                     MDFillRoundFlatButton:
                         id: post_down
                         size_hint: (1, 0.1)
                         pos_hint: {'center_x': .5, "top": 1}
                         font_size: 0.5* self.height
                         text: "Down"
-                        value: 1
-                        on_release: self.four_news()
+                        value: -1
+                        on_release: app.four_news(self.value)
            
                
 
