@@ -26,6 +26,9 @@ class RagalyApp(MDApp):
         self.posts = []
         self.max_post = 4
         self.post_pos = 0
+    
+    def id_post(self, s_value):
+        print("The Post", s_value)
 
     def four_news(self, direction):
         print("direction: ", direction)
@@ -43,6 +46,7 @@ class RagalyApp(MDApp):
             post_id  = self.post_pos + pos
             # rint(self.root.ids[card_id].ids["post_title"])
             # self.root.ids[card_id].ids["post_title"].text = str(self.post_pos + pos)
+            self.root.ids[card_id].value = post_id
             p_title = self.posts[post_id][1]
             self.root.ids[card_id].ids["post_title"].text = str(p_title)
             p_date = self.posts[post_id][4].date()

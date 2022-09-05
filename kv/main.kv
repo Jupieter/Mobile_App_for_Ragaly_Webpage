@@ -13,6 +13,7 @@
     radius: 20
     orientation: 'vertical'
     line_color: (0, 0, 0, 1)
+    value: 0
 
     MDBoxLayout:
         id: box_post
@@ -136,15 +137,20 @@ MDScreen:
 
                     PostCard:
                         id: post1
+                        on_touch_down: app.id_post(self.value)
                         
                     PostCard:
                         id: post2
+                        on_touch_down: app.id_post(self.value)
                         
                     PostCard:
                         id: post3
+                        on_touch_down: app.id_post(self.value)
                         
                     PostCard:
                         id: post4
+                        on_touch_down: app.id_post(self.value)
+                        
                 MDGridLayout:
                     id: dose_grid
                     size_hint: (0.9,  0.05)
