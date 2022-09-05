@@ -1,5 +1,6 @@
 import os
 import datetime
+from tkinter import Image
 os.environ['KIVY_NO_CONSOLELOG'] = '1'
 cwd = os.getcwd()
 # print(cwd)
@@ -9,10 +10,9 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
-
+from kivy.uix.image import AsyncImage
 import transform
 from get_data import *
-
 
 
 class ContentNavigationDrawer(MDBoxLayout):
@@ -49,7 +49,15 @@ class RagalyApp(MDApp):
             print(p_date)
             self.root.ids[card_id].ids["post_date"].text = str(p_date)
             p_pict = self.posts[post_id][5]
-            print(p_pict)
+            if p_pict != []:
+                print(p_pict[0])
+                a_image = AsyncImage(source=p_pict[0])
+                print(a_image)
+                print(self.root.ids[card_id].ids["post_image"].source)
+                self.root.ids[card_id].ids["post_image"].source = p_pict[0]
+            else:
+                self.root.ids[card_id].ids["post_image"].source = "images/cimer.jpg"
+
 
         pass    
 

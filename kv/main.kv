@@ -20,11 +20,18 @@
         padding: 0.01 * self.height
         spacing: 0.01 * self.height
 
-        Image:
+        # Button:
+        #     id: post_image
+        #     size_hint: 0.4, 1
+        #     # size: "100dp", "100dp"
+        #     background_normal: "images/cimer.jpg"
+
+        AsyncImage:
             id: post_image
             size_hint: 0.4, 1
             # size: "100dp", "100dp"
             source: "images/cimer.jpg"
+            # source: "http://ragaly.hu/wp-content/uploads/2020/09/Plakat_2021-2.jpg"
 
         MDBoxLayout:
             id: box_post_lbl
@@ -140,7 +147,7 @@ MDScreen:
                         id: post4
                 MDGridLayout:
                     id: dose_grid
-                    size_hint: (0.9,  0.1)
+                    size_hint: (0.9,  0.05)
                     pos_hint: {'center_x': .5, 'top': 0.1}
                     value: 0
                     cols: 3
