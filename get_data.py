@@ -53,7 +53,7 @@ class DB_questions():
       elif post[2] == 0:
         post[2] = post[0]
         # print("csere", post[0], post[2]) # type(post[2])
-    print("----------------------------------------------------------")
+    print("-------------------------zero_post---------------------------------")
     myresult_out = sorted(myresult_in, key=lambda x: x[0], reverse=True)
     # for post in myresult_out:
     #   print("have zero? : ", post[0], post[2])
@@ -64,10 +64,10 @@ class DB_questions():
     '''select the last post revision id'''
     rev = ""
     rev_old = ""
-    i = 0
+    max_post = 0
     # for x in myresult_in:
     #   print(x[0],x[2])
-    print("----------------------------------------------------------")
+    print("--------------------------post_ids--------------------------------")
     # select the last revision posts
     posts = []
     for x in myresult_in:
@@ -80,10 +80,10 @@ class DB_questions():
         and x[0] != 475):
         rev_old = rev
         posts.append(x)
-        i +=1
+        max_post += 1
         # print("appendált: ",x[0], x[1], x[2])
-    print("list no: ", i)
-    return posts    
+    print("max_post: ", max_post)
+    return posts, max_post    
 
   def runner(self):
     myresult = self.post_rev()
