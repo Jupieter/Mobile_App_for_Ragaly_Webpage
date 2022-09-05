@@ -26,7 +26,7 @@ class DB_questions():
     con = self.db_get() 
     cur = con.cursor()
     sql =  """
-          SELECT id, post_title, post_parent, post_content 
+          SELECT id, post_title, post_parent, post_content, post_date
           FROM wragalyp_posts 
           WHERE post_type='revision' OR post_type='post' 
           ORDER BY post_parent ASC
@@ -72,7 +72,11 @@ class DB_questions():
     posts = []
     for x in myresult_in:
       rev = x[2]
-      if rev != rev_old and rev_old != x[0] and x[3] != "": 
+      if (rev != rev_old 
+        and rev_old != x[0] 
+        and x[3] != "" 
+        and x[2] != 475     # id=475 -> info from the css format 
+        and x[0] != 475):
         rev_old = rev
         posts.append(x)
         i +=1
