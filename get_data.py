@@ -76,6 +76,7 @@ class DB_questions():
         and rev_old != x[0] 
         and x[3] != "" 
         and x[2] != 475     # id=475 -> info from the css format 
+        and x[2] != 342     # id=475 -> info from the css format 
         and x[0] != 475):
         rev_old = rev
         posts.append(x)

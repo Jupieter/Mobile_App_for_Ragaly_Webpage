@@ -9,7 +9,7 @@ def text_find(html_post):
     # Calculating result
     html_txt = soup.get_text()
     # Printing the result
-    print('html_txt', html_txt)
+    # print('html_txt', html_txt)
     return html_txt 
 
 def link_find(html_post):
