@@ -10,7 +10,6 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivy.uix.image import AsyncImage
 import transform
 from get_data import *
 
@@ -55,8 +54,6 @@ class RagalyApp(MDApp):
             p_pict = self.posts[post_id][5]
             if p_pict != []:
                 print(p_pict[0])
-                a_image = AsyncImage(source=p_pict[0])
-                print(a_image)
                 print(self.root.ids[card_id].ids["post_image"].source)
                 self.root.ids[card_id].ids["post_image"].source = p_pict[0]
             else:
