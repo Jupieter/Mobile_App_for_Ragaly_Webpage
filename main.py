@@ -1,6 +1,6 @@
 import os
 import datetime
-from tkinter import Image
+# from tkinter import Image
 os.environ['KIVY_NO_CONSOLELOG'] = '1'
 cwd = os.getcwd()
 # print(cwd)
