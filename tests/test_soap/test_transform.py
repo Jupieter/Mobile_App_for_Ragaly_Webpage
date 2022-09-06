@@ -1,6 +1,6 @@
 import pytest
 # from soap import HtmlTransformer
-import transform
+import tests.transform as transform
 
 
 def test_transform():

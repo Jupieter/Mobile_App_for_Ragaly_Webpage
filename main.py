@@ -10,8 +10,8 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
-import transform
-from get_data import *
+# import transform
+# from get_data import *
 
 
 class ContentNavigationDrawer(MDBoxLayout):

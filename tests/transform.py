@@ -1,4 +1,4 @@
-from get_data import *
+from tests.get_data import *
 import soap
 
 

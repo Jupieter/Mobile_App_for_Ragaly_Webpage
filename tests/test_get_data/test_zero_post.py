@@ -1,4 +1,4 @@
-from get_data import DB_questions
+from tests.get_data import DB_questions
 
 
 def test_zero():
