@@ -1,5 +1,6 @@
 import os
 import datetime
+print("import Ragaly")
 # from tkinter import Image
 os.environ['KIVY_NO_CONSOLELOG'] = '1'
 cwd = os.getcwd()
@@ -21,6 +22,7 @@ class ContentNavigationDrawer(MDBoxLayout):
 
 class RagalyApp(MDApp):
     def __init__(self, **kwargs):
+        print("--init-_")
         super(RagalyApp, self).__init__(**kwargs)
         self.posts = []
         self.max_post = 4
@@ -67,15 +69,15 @@ class RagalyApp(MDApp):
         # posts, self.max_post = get_db.runner()                 # All last revisioned post
         # self.posts = transform.transform(posts) 
         # self.four_news(0)
-        print("on_start")
+        print("on_start ragaly")
 
 
     def build(self):
-        print('Build 0')
+        print('Build Ragaly')
         self.theme_cls.theme_style = "Light"
         self.theme_cls.primary_palette = "Blue"  # "Purple", "Red"
         return Builder.load_file('kv/main.kv')
 
 if __name__ == '__main__':
-    print('START MAIN')
+    print('START MAIN RAGALY')
     RagalyApp().run()
