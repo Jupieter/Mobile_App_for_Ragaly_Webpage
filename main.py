@@ -1,11 +1,13 @@
 import os
 import datetime
-print("import Ragaly")
+print("import I. Ragaly")
 # from tkinter import Image
 os.environ['KIVY_NO_CONSOLELOG'] = '1'
 cwd = os.getcwd()
-# print(cwd)
+print("cwd, ",cwd)
 os.environ['KIVY_HOME'] = cwd + '/conf'
+
+print("import II. Ragaly")
 
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
@@ -16,17 +18,20 @@ from kivymd.uix.boxlayout import MDBoxLayout
 
 
 class ContentNavigationDrawer(MDBoxLayout):
+    print("ContentNavigationDrawer")
     screen_manager = ObjectProperty()
     nav_drawer = ObjectProperty()
+    print("ContentNavigationDrawer   END")
 
 
 class RagalyApp(MDApp):
     def __init__(self, **kwargs):
-        print("--init-_")
+        print("--init--")
         super(RagalyApp, self).__init__(**kwargs)
         self.posts = []
         self.max_post = 4
         self.post_pos = 0
+        print("--init--   END")
     
     def id_post(self, s_value):
         print("The Post", s_value)
@@ -75,7 +80,9 @@ class RagalyApp(MDApp):
     def build(self):
         print('Build Ragaly')
         self.theme_cls.theme_style = "Light"
+        print("light")
         self.theme_cls.primary_palette = "Blue"  # "Purple", "Red"
+        print("Blue")
         return Builder.load_file('kv/main.kv')
 
 if __name__ == '__main__':
