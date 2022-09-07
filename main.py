@@ -9,7 +9,7 @@ print("cwd, ",cwd)
 
 
 print("import III. Ragaly")
-from kivy.properties import ObjectProperty
+# from kivy.properties import ObjectProperty
 print("import IV. Ragaly")
 from kivymd.app import MDApp
 print("import V. Ragaly")
@@ -23,8 +23,8 @@ print("import II. Ragaly")
 
 class ContentNavigationDrawer(MDBoxLayout):
     print("ContentNavigationDrawer")
-    screen_manager = ObjectProperty()
-    nav_drawer = ObjectProperty()
+    # screen_manager = ObjectProperty()
+    # nav_drawer = ObjectProperty()
     print("ContentNavigationDrawer   END")
 
 
