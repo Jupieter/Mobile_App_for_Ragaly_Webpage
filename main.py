@@ -5,7 +5,7 @@ print("import I. Ragaly")
 # os.environ['KIVY_NO_CONSOLELOG'] = '1'
 cwd = os.getcwd()
 print("cwd, ",cwd)
-# os.environ['KIVY_HOME'] = cwd + '/conf'
+os.environ['KIVY_HOME'] = cwd + '/conf'
 
 
 print("import III. Ragaly")
