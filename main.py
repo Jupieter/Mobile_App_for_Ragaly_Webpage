@@ -2,7 +2,7 @@ import os
 import datetime
 print("import I. Ragaly")
 # from tkinter import Image
-os.environ['KIVY_NO_CONSOLELOG'] = '1'
+# os.environ['KIVY_NO_CONSOLELOG'] = '1'
 cwd = os.getcwd()
 print("cwd, ",cwd)
 # os.environ['KIVY_HOME'] = cwd + '/conf'
