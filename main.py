@@ -10,9 +10,13 @@ os.environ['KIVY_HOME'] = cwd + '/conf'
 print("import II. Ragaly")
 
 from kivy.lang import Builder
+print("import III. Ragaly")
 from kivy.properties import ObjectProperty
+print("import IV. Ragaly")
 from kivymd.app import MDApp
+print("import V. Ragaly")
 from kivymd.uix.boxlayout import MDBoxLayout
+print("import VI. Ragaly")
 # import transform
 # from get_data import *
 
