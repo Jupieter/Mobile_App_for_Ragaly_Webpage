@@ -15,7 +15,7 @@ from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 import transform
 from get_data import *
-from madeby import MadeByCard
+from madeby import MadeByBox
 print("import VII. Ragaly")
 
 
@@ -79,7 +79,7 @@ class RagalyApp(MDApp):
         self.posts = transform.transform(posts) 
         self.four_news(0)
         print(self.root.ids)
-        self.root.ids.scr3_box.add_widget(MadeByCard())  
+        self.root.ids.scr3_box.add_widget(MadeByBox())  
         print("on_start ragaly                END")
 
 

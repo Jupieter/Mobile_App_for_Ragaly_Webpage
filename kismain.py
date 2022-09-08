@@ -7,13 +7,17 @@ os.environ['KIVY_HOME'] = cwd + '/conf'
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivymd.uix.card import MDCard
-from madeby import MadeByCard
+from madeby import MadeByBox
 
 kv = """
 MDScreen:
     id: "main_scr"
     MDBoxLayout:
-        id: main_box
+        id: scr3_box
+        orientation: "vertical"
+        pos_hint: {"center_x": .5, "center_y": .5}
+        size_hint: 0.95, 0.95
+    
 """
 
 
@@ -32,7 +36,7 @@ class MadeByApp(MDApp):
     def on_start(self):
         print('on_start')
         print(self.root.ids)
-        self.root.ids.main_box.add_widget(MadeByCard())    
+        self.root.ids.scr3_box.add_widget(MadeByBox())    
 
 
 

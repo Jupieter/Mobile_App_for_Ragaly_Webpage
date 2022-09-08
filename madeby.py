@@ -1,15 +1,16 @@
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivymd.uix.card import MDCard
+from kivymd.uix.boxlayout import MDBoxLayout
 
 
 
 presentation = Builder.load_file('kv/madeby.kv')
 
-class MadeByCard(MDCard): 
+class MadeByBox(MDBoxLayout): 
 	
 	def __init__(self, **kwargs):
-		super(MadeByCard, self).__init__(**kwargs)
+		super(MadeByBox, self).__init__(**kwargs)
 	print('MadeByCard 0')
 
 
