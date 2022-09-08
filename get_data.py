@@ -28,7 +28,7 @@ class DB_questions():
     sql =  """
           SELECT id, post_title, post_parent, post_content, post_date
           FROM wragalyp_posts 
-          WHERE post_type='revision' OR post_type='post' 
+          WHERE (post_type='revision' OR post_type='post') AND (post_date>'2018.01.01 00:00')
           ORDER BY post_parent ASC
           """
     # sql = "SELECT post_title FROM wragalyp_posts WHERE id=42624 " , id DESC

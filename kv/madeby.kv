@@ -3,10 +3,9 @@
 
 
 <MadeByBox>:
-
     MDCard:
         id: programmer
-        on_pre_enter: 
+        # on_pre_enter: 
         size_hint: 0.95, 0.8
         pos_hint: {"center_x": 0.5, "top": 0.9}
         elevation: 25
@@ -15,7 +14,7 @@
         radius: 20
         orientation: 'vertical'
         line_color: (0, 0, 0, 1)
-
+    
         MDLabel:
             markup: True
             text: "Used technologie:"    
@@ -23,7 +22,7 @@
             pos_hint: {'center_x': .5, 'top': 1}
             size_hint: 0.95, 0.1
             font_size: 0.5 * self.height
-
+    
         MDGridLayout:
             id: madeby_grid
             size_hint: (0.9,  0.9)
@@ -32,7 +31,7 @@
             cols: 2
             padding: 10
             spacing: 10
-
+    
             Image:
                 size_hint: 0.5, 1
                 source: "images/kivy.png"
@@ -45,8 +44,8 @@
                 on_ref_press:
                     import webbrowser
                     webbrowser.open(args[1])
-
-
+                    
+    
             Image:
                 size_hint: 0.5, 1
                 source: "images/python.png"
@@ -59,8 +58,8 @@
                 on_ref_press:
                     import webbrowser
                     webbrowser.open(args[1])
-
-
+    
+    
             Image:
                 size_hint: 0.5, 1
                 source: "images/buildozer.png"
@@ -73,8 +72,8 @@
                 on_ref_press:
                     import webbrowser
                     webbrowser.open(args[1])
-
-
+    
+    
             Image:
                 size_hint: 0.5, 1
                 source: "images/pytest.png"
@@ -87,8 +86,8 @@
                 on_ref_press:
                     import webbrowser
                     webbrowser.open(args[1])
-
-
+    
+    
             Image:
                 size_hint: 0.5, 1
                 source: "images/mysql.png"
@@ -101,7 +100,7 @@
                 on_ref_press:
                     import webbrowser
                     webbrowser.open(args[1])
-
+    
             Image:
                 size_hint: 0.5, 1
                 source: "images/github.png"

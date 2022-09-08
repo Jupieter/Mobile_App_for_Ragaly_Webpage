@@ -7,7 +7,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 
 presentation = Builder.load_file('kv/madeby.kv')
 
-class MadeByBox(MDBoxLayout): 
+class MadeByBox(MDCard): 
 	
 	def __init__(self, **kwargs):
 		super(MadeByBox, self).__init__(**kwargs)
