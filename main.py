@@ -7,18 +7,15 @@ cwd = os.getcwd()
 print("cwd, ",cwd)
 os.environ['KIVY_HOME'] = cwd + '/conf'
 
-print("import II. Ragaly")
+
 
 from kivy.lang import Builder
-print("import III. Ragaly")
 from kivy.properties import ObjectProperty
-print("import IV. Ragaly")
 from kivymd.app import MDApp
-print("import V. Ragaly")
 from kivymd.uix.boxlayout import MDBoxLayout
-print("import VI. Ragaly")
 import transform
 from get_data import *
+from madeby import MadeByCard
 print("import VII. Ragaly")
 
 
@@ -75,11 +72,15 @@ class RagalyApp(MDApp):
         pass    
 
     def on_start(self):
+        print("on_start ragaly                START")
         get_db = DB_questions()
+        print(get_db)
         posts, self.max_post = get_db.runner()                 # All last revisioned post
         self.posts = transform.transform(posts) 
         self.four_news(0)
-        print("on_start ragaly")
+        print(self.root.ids)
+        self.root.ids.scr3_box.add_widget(MadeByCard())  
+        print("on_start ragaly                END")
 
 
     def build(self):
@@ -88,7 +89,7 @@ class RagalyApp(MDApp):
         print("light")
         self.theme_cls.primary_palette = "Blue"  # "Purple", "Red"
         print("Blue")
-        return Builder.load_file('./kv/main.kv')
+        return Builder.load_file('kv/main.kv')
 
 if __name__ == '__main__':
     print('START MAIN RAGALY')
