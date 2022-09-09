@@ -12,6 +12,7 @@ os.environ['KIVY_HOME'] = cwd + '/conf'
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.boxlayout import MDBoxLayout
 import transform
 from get_data import *
@@ -37,6 +38,18 @@ class RagalyApp(MDApp):
     
     def id_post(self, post_pk):
         print("The Post", post_pk)
+        p_title = self.posts[post_pk][1]
+        p_text = self.posts[post_pk][3]
+        print("p_title", p_title)
+        self.root.ids["scr2_post_title"].text = p_title
+        self.root.ids["scr2_post"].text = p_text
+        # scr = self.root.ids["screen_manager"]
+        sm = self.root.ids.screen_manager
+        scr = sm.current
+        # sc2 = self.root.current
+        print(sm, "scr =", scr)
+        sm.current = "scr_2"
+        
 
     def four_news(self, direction):
         print("direction: ", direction)
@@ -87,10 +100,11 @@ class RagalyApp(MDApp):
 
     def build(self):
         print('Build Ragaly')
-        self.theme_cls.theme_style = "Light"
-        print("light")
-        self.theme_cls.primary_palette = "Blue"  # "Purple", "Red"
-        print("Blue")
+        # self.theme_cls.theme_style = "Light"
+        # print("light")
+        # self.theme_cls.primary_palette = "Blue"  # "Purple", "Red"
+        # print("Blue")
+
         return Builder.load_file('kv/main.kv')
 
 if __name__ == '__main__':

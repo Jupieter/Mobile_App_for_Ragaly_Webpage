@@ -105,6 +105,7 @@ MDScreen:
         x: toolbar.height
 
         MDScreenManager:
+            name: "screen_manager"
             id: screen_manager
 
             # SCREEN 1  -----------------------HÍREK-----------------------                        
@@ -182,10 +183,27 @@ MDScreen:
 
             MDScreen:
                 name: "scr_2"
-
-                MDLabel:
-                    text: "Screen 2"    
-                    halign: "center"
+                MDBoxLayout:
+                    id: scr2_box
+                    orientation: "vertical"
+                    pos_hint: {"center_x": .5, "top": 0.9}
+                    size_hint: 0.95, 0.95
+                    MDLabel:
+                        id: scr2_post_title
+                        markup: True
+                        size_hint: (0.9, 0.9)
+                        pos_hint: {'center_x': .5, "top": 0.9}
+                        font_size: 20 #0.3 * self.height
+                        halign: "left"
+                        text: "Post Title"
+                    MDLabel:
+                        id: scr2_post
+                        markup: True
+                        size_hint: (0.9, 0.9)
+                        pos_hint: {'center_x': .5, "top": 0.9}
+                        font_size: 15 #0.3 * self.height
+                        halign: "left"
+                        text: "Post"
 
             # SCREEN 3  --------------------  Programmed By: --------------------------                        
 

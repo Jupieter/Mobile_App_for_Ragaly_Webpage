@@ -26,7 +26,7 @@ class DB_questions():
     sql =  """
           SELECT id, post_title, post_parent, post_content, post_date
           FROM wragalyp_posts 
-          WHERE (post_type = 'revision' OR post_type = 'post') AND (post_modified > DATE_ADD(now(), INTERVAL -6 YEAR)  )
+          WHERE (post_type = 'revision' OR post_type = 'post') AND (post_modified > DATE_ADD(now(), INTERVAL -5 YEAR)  )
           ORDER BY post_parent ASC, id DESC
           """
     cur.execute(sql)
