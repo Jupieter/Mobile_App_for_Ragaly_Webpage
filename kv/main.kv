@@ -13,7 +13,6 @@
     radius: 20
     orientation: 'vertical'
     line_color: (0, 0, 0, 1)
-    value: 0
     # on_touch_up: app.four_news(1)
     # on_touch_down: app.four_news(-1)
 
@@ -126,19 +125,23 @@ MDScreen:
 
                     PostCard:
                         id: post1
-                        on_touch_down: app.id_post(self.value)
+                        value: 0
+                        on_press: app.id_post(self.value)
                         
                     PostCard:
                         id: post2
-                        on_touch_down: app.id_post(self.value)
+                        value: 0
+                        on_press: app.id_post(self.value)
                         
                     PostCard:
                         id: post3
-                        on_touch_down: app.id_post(self.value)
+                        value: 0
+                        on_press: app.id_post(self.value)
                         
                     PostCard:
                         id: post4
-                        on_touch_down: app.id_post(self.value)
+                        value: 0
+                        on_press: app.id_post(self.value)
                         
                 MDGridLayout:
                     id: dose_grid

@@ -35,8 +35,8 @@ class RagalyApp(MDApp):
         self.post_pos = 0
         print("--init--   END")
     
-    def id_post(self, s_value):
-        print("The Post", s_value)
+    def id_post(self, post_pk):
+        print("The Post", post_pk)
 
     def four_news(self, direction):
         print("direction: ", direction)
@@ -60,7 +60,7 @@ class RagalyApp(MDApp):
             p_parent = self.posts[post_id][2]
             self.root.ids[card_id].ids["post_title"].text = str(p_title)
             p_date = self.posts[post_id][4].date()
-            print(p_date)
+            # print(p_date)
             self.root.ids[card_id].ids["post_date"].text = str(post_id) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
             p_pict = self.posts[post_id][5]
             if p_pict != []:
