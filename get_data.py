@@ -1,7 +1,5 @@
 # from unicodedata import name
 import pymysql
-
-
 class DB_questions():
 
   def db_get(self):
@@ -28,10 +26,9 @@ class DB_questions():
     sql =  """
           SELECT id, post_title, post_parent, post_content, post_date
           FROM wragalyp_posts 
-          WHERE (post_type='revision' OR post_type='post') AND (post_date>'2018.01.01 00:00')
-          ORDER BY post_parent ASC
+          WHERE (post_type = 'revision' OR post_type = 'post') AND (post_modified > DATE_ADD(now(), INTERVAL -6 YEAR)  )
+          ORDER BY post_parent ASC, id DESC
           """
-    # sql = "SELECT post_title FROM wragalyp_posts WHERE id=42624 " , id DESC
     cur.execute(sql)
     myresult = cur.fetchall()
     myresult_out = list(myresult)
@@ -54,7 +51,7 @@ class DB_questions():
         post[2] = post[0]
         # print("csere", post[0], post[2]) # type(post[2])
     print("-------------------------zero_post---------------------------------")
-    myresult_out = sorted(myresult_in, key=lambda x: x[0], reverse=True)
+    myresult_out = sorted(myresult_in, key=lambda x: x[2], reverse=True)
     # for post in myresult_out:
     #   print("have zero? : ", post[0], post[2])
     return myresult_out
@@ -87,11 +84,16 @@ class DB_questions():
 
   def runner(self):
     myresult = self.post_rev()
+    # for post in myresult:
+    #   print(post[0:3])
     post_lst = self.tuple_to_list(myresult)
     post_zero = self.zero_post_type(post_lst)
+    for post in post_zero:
+      print(post[0:3])
     posts = self.post_ids(post_zero)
+    # print("posts: ---", posts)
     # for post in posts:
-    #   print(post[0:3])
+    #   print(post)
     # htmls = self. html_transform(posts)
     # for x in htmls:
     #   print(x)

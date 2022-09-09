@@ -55,11 +55,13 @@ class RagalyApp(MDApp):
             # rint(self.root.ids[card_id].ids["post_title"])
             # self.root.ids[card_id].ids["post_title"].text = str(self.post_pos + pos)
             self.root.ids[card_id].value = post_id
+            p_id = self.posts[post_id][0]
             p_title = self.posts[post_id][1]
+            p_parent = self.posts[post_id][2]
             self.root.ids[card_id].ids["post_title"].text = str(p_title)
             p_date = self.posts[post_id][4].date()
             print(p_date)
-            self.root.ids[card_id].ids["post_date"].text = str(p_date)
+            self.root.ids[card_id].ids["post_date"].text = str(post_id) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
             p_pict = self.posts[post_id][5]
             if p_pict != []:
                 print(p_pict[0])
