@@ -15,15 +15,16 @@ from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.card import MDCard
+from kivymd.uix.label import MDLabel
 
 import transform
 from get_data import *
 from madeby import MadeByBox
-print("import VII. Ragaly")
+print("import II. Ragaly")
+
 
 
 class PostCard(MDCard):
-    print("--init--")
     def __init__(self, **kwargs):
         super(PostCard, self).__init__(**kwargs)
     
@@ -53,13 +54,16 @@ class RagalyApp(MDApp):
         p_title = self.posts[post_pk][1]
         p_text = self.posts[post_pk][3]
         print("p_title", p_title)
+        grid = self.root.ids["post_grid"]
+        print(self.root.ids)
+        print(grid)
+
+        # post_t = PostTitleLabel
+        # grid.add_widget()
+
         self.root.ids["scr2_post_title"].text = p_title
         self.root.ids["scr2_post"].text = p_text
-        # scr = self.root.ids["screen_manager"]
         sm = self.root.ids.screen_manager
-        # scr = sm.current
-        # sc2 = self.root.current
-        # print(sm, "scr =", scr)
         sm.current = "scr_2"
     
     def post_news(self):
@@ -86,44 +90,7 @@ class RagalyApp(MDApp):
                 banner.ids["post_image"].source = "images/cimer.jpg"
             grid.add_widget(banner)
              #print(banner.ids)
-
-        
-
-        
-
-    def four_news(self, direction):
-        print("direction: ", direction)
-        self.post_pos += direction * 4
-        if self.post_pos >= (self.max_post-3): 
-            self.post_pos = self.max_post-4
-        if self.post_pos <= 0: 
-            self.post_pos = 0
-        if direction == 0:
-            self.post_pos = 0
-        print(self.post_pos)
-        # print(self.root.ids)
-        for pos in range(0,4,1):
-            card_id = "post" + str(pos+1)
-            post_id  = self.post_pos + pos
-            # rint(self.root.ids[card_id].ids["post_title"])
-            # self.root.ids[card_id].ids["post_title"].text = str(self.post_pos + pos)
-            self.root.ids[card_id].value = post_id
-            p_id = self.posts[post_id][0]
-            p_title = self.posts[post_id][1]
-            p_parent = self.posts[post_id][2]
-            p_date = self.posts[post_id][4].date()
-            self.root.ids[card_id].ids["post_title"].text = str(p_title)
-            # print(p_date)
-            p_pict = self.posts[i][5]
-            if p_pict != []:
-                print(p_pict[0])
-                print(self.root.ids[card_id].ids["post_image"].source)
-                self.root.ids[card_id].ids["post_image"].source = p_pict[0]
-            else:
-                self.root.ids[card_id].ids["post_image"].source = "images/cimer.jpg"
-
-
-        pass    
+ 
 
     def on_start(self):
         print("on_start ragaly                START")
@@ -134,7 +101,8 @@ class RagalyApp(MDApp):
         # self.four_news(0)
         self.post_news()
         # print(self.root.ids)
-        self.root.ids.scr3_box.add_widget(MadeByBox())  
+        self.root.ids.scr3_box.add_widget(MadeByBox()) 
+        # self.root.ids.post_grid.add_widget(PostBox()) 
         print("on_start ragaly                END")
 
 
