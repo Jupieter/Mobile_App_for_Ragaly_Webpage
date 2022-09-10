@@ -44,6 +44,9 @@ class RagalyApp(MDApp):
         self.post_pos = 0
         print("--init--   END")
     
+    def go_home(self):
+        sm = self.root.ids.screen_manager
+        sm.current = "scr_1"
     
     def id_post(self, post_pk):
         print("The Post", post_pk)
@@ -54,9 +57,9 @@ class RagalyApp(MDApp):
         self.root.ids["scr2_post"].text = p_text
         # scr = self.root.ids["screen_manager"]
         sm = self.root.ids.screen_manager
-        scr = sm.current
+        # scr = sm.current
         # sc2 = self.root.current
-        print(sm, "scr =", scr)
+        # print(sm, "scr =", scr)
         sm.current = "scr_2"
     
     def post_news(self):
@@ -83,6 +86,7 @@ class RagalyApp(MDApp):
                 banner.ids["post_image"].source = "images/cimer.jpg"
             grid.add_widget(banner)
              #print(banner.ids)
+
         
 
         

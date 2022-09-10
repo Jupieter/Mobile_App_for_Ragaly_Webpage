@@ -70,13 +70,13 @@
                 text: "Elérhetőségünk"
                 on_press:
                     root.nav_drawer.set_state("close")
-                    root.screen_manager.current = "scr_2"
+                    root.screen_manager.current = "scr_3"
 
             OneLineListItem:
                 text: "Open Source THX:"
                 on_press:
                     root.nav_drawer.set_state("close")
-                    root.screen_manager.current = "scr_3"
+                    root.screen_manager.current = "scr_4"
             
 
 
@@ -106,7 +106,7 @@ MDScreen:
                 ScrollView:
                     id: post_scroll 
                     pos_hint: {"center_x": 0.5, "top": 0.91}
-                    size_hint_y: 0.85
+                    size_hint_y: 0.84
                     do_scroll_x: False
                     do_scroll_y: True
                     GridLayout:
@@ -116,12 +116,12 @@ MDScreen:
                         spacing: 10, 10
                         size_hint_y: None
                         height: self.minimum_height
-                        row_default_height: root.height / 5
+                        row_default_height: root.height / 5.2
 
            
                
 
-            # SCREEN 2  -----------------------  Adresses:  -----------------------                        
+            # SCREEN 2  -----------------------  ONE POST:  -----------------------                        
 
             MDScreen:
                 name: "scr_2"
@@ -146,11 +146,15 @@ MDScreen:
                         font_size: 15 #0.3 * self.height
                         halign: "left"
                         text: "Post"
+            # SCREEN 2  -----------------------  Adresses:  -----------------------                        
+
+            MDScreen:
+                name: "scr_3"
 
             # SCREEN 3  --------------------  Programmed By: --------------------------                        
 
             MDScreen:
-                name: "scr_3"
+                name: "scr_4"
                 
 
                 MDBoxLayout:
@@ -165,3 +169,11 @@ MDScreen:
             ContentNavigationDrawer:
                 screen_manager: screen_manager
                 nav_drawer: nav_drawer
+    
+    MDBottomAppBar:
+
+        MDTopAppBar:
+            title: "Title"
+            icon: "home"
+            type: "bottom"
+            on_action_button: app.go_home()
