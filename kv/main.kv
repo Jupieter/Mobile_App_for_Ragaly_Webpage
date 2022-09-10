@@ -4,23 +4,6 @@
 
 
 
-<PostImage@Image>
-    id: post_img
-    size_hint: None, None
-    size: "80dp", "160dp"
-    source: "images/cimer.jpg"
-<PostContentLabel@MDLabel>
-    id: scr2_post
-    markup: True
-    size_hint: (0.9, 0.9)
-    pos_hint: {'center_x': .5, "top": 0.85}
-    font_size: 15 #0.3 * self.height
-    halign: "left"
-    text: "Post"
-
-
-
-
 
 
 <PostCard>
@@ -151,16 +134,18 @@ MDScreen:
                     id: scr2_post_title
                     markup: True
                     size_hint: (0.9, None)
-                    pos_hint: {'center_x': .5, "top": 0.96}
+                    pos_hint: {'center_x': .5, "top": 0.95}
                     font_size: 20 #0.3 * self.height
                     halign: "left"
                     text: "Post Title"
                 ScrollView:
                     id: post_scroll 
                     pos_hint: {"center_x": 0.5, "top": 0.86}
-                    size_hint_y: 0.84
+                    size_hint_y: 0.77
                     do_scroll_x: False
                     do_scroll_y: True
+                    scroll_y: 1
+                    # effect_cls: "ScrollEffect"
                     GridLayout:
                         id: post_grid
                         cols: 1
@@ -168,22 +153,26 @@ MDScreen:
                         spacing: 10, 10
                         size_hint_y: None
                         height: self.minimum_height
-                        row_default_height: 100
+                        # size:self_on_size
+                        # row_default_height: 200
+                        AsyncImage:
+                            id: post_img
+                            size_hint_y: None
+                            height: self.texture_size[0]
+                            # size_hint: (1, None)
+                            # pos_hint: {'center_x': .5, "top": 0.85}
+                            # size: "80dp", "160dp"
+                            source: ""
                         MDLabel:
                             id: scr2_post
                             markup: True
-                            size_hint: (1, None)
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            # size_hint: (1, 1)
                             # pos_hint: {'center_x': .5, "top": 0.85}
                             font_size: 15 #0.3 * self.height
                             halign: "left"
                             text: "Post"
-                        Image:
-                            id: post_img
-                            
-                            size_hint: (1, None)
-                            # pos_hint: {'center_x': .5, "top": 0.85}
-                            # size: "80dp", "160dp"
-                            source: "images/cimer.jpg"
 
             # SCREEN 2  -----------------------  Adresses:  -----------------------                        
 

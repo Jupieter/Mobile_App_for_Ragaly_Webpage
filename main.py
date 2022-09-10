@@ -16,6 +16,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel
+from kivy.uix.image import AsyncImage
 
 import transform
 from get_data import *
@@ -55,14 +56,17 @@ class RagalyApp(MDApp):
         p_text = self.posts[post_pk][3]
         print("p_title", p_title)
         grid = self.root.ids["post_grid"]
-        print(self.root.ids)
-        print(grid)
-
-        # post_t = PostTitleLabel
-        # grid.add_widget()
-
+        # print(self.root.ids)
+        # print(grid)
         self.root.ids["scr2_post_title"].text = p_title
         self.root.ids["scr2_post"].text = p_text
+        p_pict = self.posts[post_pk][5]
+        print(p_pict)
+        if p_pict != []:
+            print(p_pict[0])
+            self.root.ids["post_img"].source = p_pict[0]
+        else:
+            self.root.ids["post_img"].source = "images/cimer.jpg"
         sm = self.root.ids.screen_manager
         sm.current = "scr_2"
     
