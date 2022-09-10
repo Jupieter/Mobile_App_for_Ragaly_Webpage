@@ -14,11 +14,19 @@ from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.card import MDCard
+
 import transform
 from get_data import *
 from madeby import MadeByBox
 print("import VII. Ragaly")
 
+
+class PostCard(MDCard):
+    print("--init--")
+    def __init__(self, **kwargs):
+        super(PostCard, self).__init__(**kwargs)
+    
 
 class ContentNavigationDrawer(MDBoxLayout):
     print("ContentNavigationDrawer")
@@ -36,6 +44,7 @@ class RagalyApp(MDApp):
         self.post_pos = 0
         print("--init--   END")
     
+    
     def id_post(self, post_pk):
         print("The Post", post_pk)
         p_title = self.posts[post_pk][1]
@@ -49,6 +58,33 @@ class RagalyApp(MDApp):
         # sc2 = self.root.current
         print(sm, "scr =", scr)
         sm.current = "scr_2"
+    
+    def post_news(self):
+        """This add MDCards to main screen with post title anf date and picture if have"""
+        print("max post: ", self.max_post)
+        grid = self.root.ids["grid_banner"]
+        for i in range(0,self.max_post,1):
+            card_id = "post" + str(i)
+            banner = PostCard()
+            banner.id= card_id
+            banner.value = i
+            p_id = self.posts[i][0]
+            p_title = self.posts[i][1]
+            p_parent = self.posts[i][2]
+            p_date = self.posts[i][4].date()
+            banner.ids["post_title"].text = str(p_title)
+            banner.ids["post_date"].text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
+            p_pict = self.posts[i][5]
+            if p_pict != []:
+                print(p_pict[0])
+                print(banner.ids["post_image"].source)
+                banner.ids["post_image"].source = p_pict[0]
+            else:
+                banner.ids["post_image"].source = "images/cimer.jpg"
+            grid.add_widget(banner)
+             #print(banner.ids)
+        
+
         
 
     def four_news(self, direction):
@@ -71,11 +107,10 @@ class RagalyApp(MDApp):
             p_id = self.posts[post_id][0]
             p_title = self.posts[post_id][1]
             p_parent = self.posts[post_id][2]
-            self.root.ids[card_id].ids["post_title"].text = str(p_title)
             p_date = self.posts[post_id][4].date()
+            self.root.ids[card_id].ids["post_title"].text = str(p_title)
             # print(p_date)
-            self.root.ids[card_id].ids["post_date"].text = str(post_id) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
-            p_pict = self.posts[post_id][5]
+            p_pict = self.posts[i][5]
             if p_pict != []:
                 print(p_pict[0])
                 print(self.root.ids[card_id].ids["post_image"].source)
@@ -89,11 +124,12 @@ class RagalyApp(MDApp):
     def on_start(self):
         print("on_start ragaly                START")
         get_db = DB_questions()
-        print(get_db)
+        # print(get_db)
         posts, self.max_post = get_db.runner()                 # All last revisioned post
         self.posts = transform.transform(posts) 
-        self.four_news(0)
-        print(self.root.ids)
+        # self.four_news(0)
+        self.post_news()
+        # print(self.root.ids)
         self.root.ids.scr3_box.add_widget(MadeByBox())  
         print("on_start ragaly                END")
 

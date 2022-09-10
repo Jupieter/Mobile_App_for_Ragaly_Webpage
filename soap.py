@@ -26,7 +26,7 @@ def link_find(html_post):
     
 def pretty_html(html_post):
     soup = BeautifulSoup(html_post, "html.parser")
-    print(soup.prettify())
+    # print(soup.prettify())
     
 
 
@@ -57,6 +57,6 @@ def html_transform(posts_in):
       # print("második: ", html_tr)
       post[3] = html_tr
       # print(post[3])
-      print(post)
+      # print(post)
     return posts
  

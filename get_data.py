@@ -16,7 +16,7 @@ class DB_questions():
        user="appfejleszt", 
        passwd="nNe4rF#pH7gRQ", 
        database="ngwpragaly")
-    print(con)
+    # print(con)
     return con
 
   def post_rev(self): 
@@ -88,8 +88,8 @@ class DB_questions():
     #   print(post[0:3])
     post_lst = self.tuple_to_list(myresult)
     post_zero = self.zero_post_type(post_lst)
-    for post in post_zero:
-      print(post[0:3])
+    # for post in post_zero:
+    #   print(post[0:3])
     posts = self.post_ids(post_zero)
     # print("posts: ---", posts)
     # for post in posts:
