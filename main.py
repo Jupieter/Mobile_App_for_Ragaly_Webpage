@@ -50,15 +50,33 @@ class RagalyApp(MDApp):
         sm = self.root.ids.screen_manager
         sm.current = "scr_1"
     
+    def hun_to_eng(self, p_adr):
+        magyar='íéáűőúöüó'
+        angol='ieauououo'
+        p_adr = p_adr.lower()
+        for i in range(0,9):
+            p_adr=p_adr.replace(magyar[i],angol[i])
+            p_adr=p_adr.replace(" ","-")
+            p_adr=p_adr.replace('"',"")
+            p_adr=p_adr.replace("'","")
+            p_adr=p_adr.replace(".","")
+        p_adr = "https://ragaly.hu/" + str(p_adr)
+        print('Adress.......: ', p_adr)
+        return p_adr
+    
     def id_post(self, post_pk):
         print("The Post", post_pk)
         p_title = self.posts[post_pk][1]
+        p_adr = self.hun_to_eng(p_title)
+        p_tit_adr = "[ref=" + p_adr + "][b]" + p_title + "[/b][/ref]"
+        print(p_tit_adr)
         p_text = self.posts[post_pk][3]
         print("p_title", p_title)
         grid = self.root.ids["post_grid"]
         # print(self.root.ids)
         # print(grid)
-        self.root.ids["scr2_post_title"].text = p_title
+        self.root.ids["scr2_post_title"].text = p_tit_adr
+        # self.root.ids["scr2_post_link"].text = p_tit_adr
         self.root.ids["scr2_post"].text = p_text
         p_pict = self.posts[post_pk][5]
         print(p_pict)
