@@ -21,9 +21,17 @@ from kivy.uix.image import AsyncImage
 import transform
 from get_data import *
 from madeby import MadeByBox
+import urllib.request
+import requests
 print("import II. Ragaly")
 
 
+def is_cnx_active(timeout=1):
+    try:
+        requests.head("http://www.google.com/", timeout=timeout)
+        return True
+    except requests.ConnectionError:
+        return False
 
 class PostCard(MDCard):
     def __init__(self, **kwargs):
@@ -49,17 +57,34 @@ class RagalyApp(MDApp):
     def go_home(self):
         sm = self.root.ids.screen_manager
         sm.current = "scr_1"
-    
+
+    def get_sql_data(self):
+        """ If have internet get data with get_db.py and transform the post content to 
+         kivy formatted text"""
+        if is_cnx_active(1) :
+            get_db = DB_questions()
+            # print(get_db)
+            posts, self.max_post = get_db.runner()                 # All last revisioned post
+            self.posts = transform.transform(posts) 
+            # self.four_news(0)
+            self.post_news()
+            # print(self.root.ids)
+
+
     def hun_to_eng(self, p_adr):
-        magyar='íéáűőúöüó'
-        angol='ieauououo'
+        """ make wordpress permalink from the post title"""
+        magyar='íéáűőúöüó '
+        angol='ieauououo-'
         p_adr = p_adr.lower()
-        for i in range(0,9):
+        for i in range(0,10
+        ):
             p_adr=p_adr.replace(magyar[i],angol[i])
-            p_adr=p_adr.replace(" ","-")
-            p_adr=p_adr.replace('"',"")
-            p_adr=p_adr.replace("'","")
-            p_adr=p_adr.replace(".","")
+            # p_adr=p_adr.replace(" ","-")
+        unnecessary = ['"',"'","."]
+        for j in unnecessary:
+            p_adr=p_adr.replace(j,"")
+            # p_adr=p_adr.replace("'","")
+            # p_adr=p_adr.replace(".","")
         p_adr = "https://ragaly.hu/" + str(p_adr)
         print('Adress.......: ', p_adr)
         return p_adr
@@ -116,13 +141,7 @@ class RagalyApp(MDApp):
 
     def on_start(self):
         print("on_start ragaly                START")
-        get_db = DB_questions()
-        # print(get_db)
-        posts, self.max_post = get_db.runner()                 # All last revisioned post
-        self.posts = transform.transform(posts) 
-        # self.four_news(0)
-        self.post_news()
-        # print(self.root.ids)
+        self.get_sql_data()
         self.root.ids.scr3_box.add_widget(MadeByBox()) 
         # self.root.ids.post_grid.add_widget(PostBox()) 
         print("on_start ragaly                END")
