@@ -3,6 +3,7 @@
 __pycache__
 venv
 temp
+assistant
 conf/logs
 conf/icon
 db.sqlite3
@@ -10,3 +11,5 @@ ragaly.egg-info
 .DS_Store
 *.bat
 *.db
+setup.py
+__init__.py
