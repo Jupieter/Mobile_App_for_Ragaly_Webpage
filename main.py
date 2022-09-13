@@ -18,20 +18,22 @@ from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel
 from kivy.uix.image import AsyncImage
 
+import requests
 import transform
 from get_data import *
 from madeby import MadeByBox
-import urllib.request
-import requests
+# from temp.picker import MDThemePicker
 print("import II. Ragaly")
 
 
 def is_cnx_active(timeout=1):
+    """ check the internet connection"""
     try:
         requests.head("http://www.google.com/", timeout=timeout)
         return True
     except requests.ConnectionError:
         return False
+
 
 class PostCard(MDCard):
     def __init__(self, **kwargs):
@@ -53,6 +55,29 @@ class RagalyApp(MDApp):
         self.max_post = 4
         self.post_pos = 0
         print("--init--   END")
+
+    def show_theme_picker(self):
+        print("PICKER")
+        theme_dialog = MDThemePicker()
+        # theme_dialog.open()
+    
+    def re_fresh(self):
+        """used   
+            - to refresh button (if no internet when app started) and 
+            - to Clock cikle
+        """
+        grid = self.root.ids["grid_banner"]
+        ch = []
+        for child in grid.children:
+            print(child.id)
+            ch.append(child)
+        for dt in ch:
+          grid.remove_widget(dt)
+        ch = []
+        self.get_sql_data()
+        sm = self.root.ids.screen_manager
+        sm.current = "scr_1"
+
     
     def go_home(self):
         sm = self.root.ids.screen_manager
@@ -90,26 +115,27 @@ class RagalyApp(MDApp):
         return p_adr
     
     def id_post(self, post_pk):
+        """ Displays the posts. The headline is a clickable link."""
         print("The Post", post_pk)
         p_title = self.posts[post_pk][1]
         p_adr = self.hun_to_eng(p_title)
         p_tit_adr = "[ref=" + p_adr + "][b]" + p_title + "[/b][/ref]"
-        print(p_tit_adr)
+        p_link_adr = "[ref=" + p_adr + "]link[/ref]"
+        # print(p_tit_adr)
         p_text = self.posts[post_pk][3]
-        print("p_title", p_title)
+        # print("p_title", p_title)
         grid = self.root.ids["post_grid"]
-        # print(self.root.ids)
-        # print(grid)
-        self.root.ids["scr2_post_title"].text = p_tit_adr
-        # self.root.ids["scr2_post_link"].text = p_tit_adr
+        self.root.ids["scr2_post_title"].text = p_title
+        self.root.ids["scr2_post_link"].text = p_link_adr
         self.root.ids["scr2_post"].text = p_text
         p_pict = self.posts[post_pk][5]
-        print(p_pict)
+        # print(p_pict)
         if p_pict != []:
             print(p_pict[0])
             self.root.ids["post_img"].source = p_pict[0]
         else:
             self.root.ids["post_img"].source = "images/cimer.jpg"
+        self.root.ids["post_scroll"].scroll_y = 1
         sm = self.root.ids.screen_manager
         sm.current = "scr_2"
     
@@ -136,14 +162,13 @@ class RagalyApp(MDApp):
             else:
                 banner.ids["post_image"].source = "images/cimer.jpg"
             grid.add_widget(banner)
-             #print(banner.ids)
+
  
 
     def on_start(self):
         print("on_start ragaly                START")
         self.get_sql_data()
         self.root.ids.scr3_box.add_widget(MadeByBox()) 
-        # self.root.ids.post_grid.add_widget(PostBox()) 
         print("on_start ragaly                END")
 
 

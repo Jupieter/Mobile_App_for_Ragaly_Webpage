@@ -13,6 +13,7 @@ def text_find(html_post):
     return html_txt 
 
 def link_find(html_post):
+    """ get all link"""
     # print(html_post)
     # get all link from html
     soup = BeautifulSoup(html_post,  "html.parser")
@@ -21,7 +22,7 @@ def link_find(html_post):
         #   print('link', link)
         one_link = link.get('href')
         links.append(one_link)
-        #   print('              one_link', one_link)
+        print('              one_link', one_link)
     return links
     
 def pretty_html(html_post):
@@ -31,6 +32,7 @@ def pretty_html(html_post):
 
 
 def pict_link(links):
+    """ get all link wich containes picture"""
     pict_list = []
     for link in links:
         ends = link[-4:-1]

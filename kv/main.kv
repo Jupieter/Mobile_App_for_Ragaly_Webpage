@@ -95,7 +95,7 @@ MDScreen:
         elevation: 10
         title: "Ragály Önkormányzati Hírek"
         left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
-        right_action_items: [["web-refresh", lambda x: app.get_sql_data()],["brush", lambda x: app.open_color_picker()]]
+        right_action_items: [["web-refresh", lambda x: app.re_fresh()], ["brush", lambda x: app.show_theme_picker()]]
 
     MDNavigationLayout:
         x: toolbar.height
@@ -149,6 +149,9 @@ MDScreen:
                     font_size: 12 
                     halign: "right"
                     text: "link"
+                    on_ref_press:
+                        import webbrowser
+                        webbrowser.open(args[1])
                 ScrollView:
                     id: post_scroll 
                     pos_hint: {"center_x": 0.5, "top": 0.86}
@@ -169,15 +172,19 @@ MDScreen:
                         AsyncImage:
                             id: post_img
                             size_hint_y: None
-                            height: self.texture_size[0]
+                            # height: self.texture_size[1]
+                            # size: self.size if self.source == "images/cimer.jpg" else Window.size # Window.size
+                            height: 50 if self.source == "images/cimer.jpg" else Window.height # Window.size
+                            keep_ratio: True
                             # size_hint: (1, None)
                             # pos_hint: {'center_x': .5, "top": 0.85}
                             # size: "80dp", "160dp"
-                            source: ""
+                            source: "images/cimer.jpg"
                         MDLabel:
                             id: scr2_post
                             markup: True
                             size_hint_y: None
+                            text_size: self.width, None
                             height: self.texture_size[1]
                             # size_hint: (1, 1)
                             # pos_hint: {'center_x': .5, "top": 0.85}
