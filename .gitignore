@@ -4,6 +4,7 @@ __pycache__
 venv
 temp
 assistant
+.buildozer
 conf/logs
 conf/icon
 db.sqlite3
