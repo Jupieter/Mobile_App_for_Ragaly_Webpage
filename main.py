@@ -169,6 +169,9 @@ class RagalyApp(MDApp):
         print("on_start ragaly                START")
         self.get_sql_data()
         self.root.ids.scr3_box.add_widget(MadeByBox()) 
+        from kivy import platform
+        if platform == "android":
+            self.start_service()
         print("on_start ragaly                END")
 
 
@@ -180,6 +183,14 @@ class RagalyApp(MDApp):
         # print("Blue")
 
         return Builder.load_file('kv/main.kv')
+    
+    @staticmethod
+    def start_service():
+        from jnius import autoclass
+        service = autoclass("org.mindset.codered.ServiceCodered")
+        mActivity = autoclass("org.kivy.android.PythonActivity").mActivity
+        service.start(mActivity, "")
+        return service
 
 if __name__ == '__main__':
     print('START MAIN RAGALY')

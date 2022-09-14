@@ -135,7 +135,8 @@ MDScreen:
                     markup: True
                     size_hint: (0.9, None)
                     pos_hint: {'center_x': .5, "top": 0.95}
-                    font_size: 0.35 * self.height
+                    text_size: self.width, None
+                    # font_size: 0.5 * self.height
                     halign: "left"
                     text: "Post Title"
                     on_ref_press:
@@ -146,7 +147,8 @@ MDScreen:
                     markup: True
                     size_hint: (0.9, None)
                     pos_hint: {'center_x': .5, "top": 0.95}
-                    font_size: 0.25 * self.height
+                    # text_size: self.width, None
+                    font_size: 0.3* self.height
                     halign: "right"
                     text: "link"
                     on_ref_press:
@@ -184,7 +186,7 @@ MDScreen:
                             id: scr2_post
                             markup: True
                             size_hint_y: None
-                            font_size: 0.25 * self.height
+                            font_size: 0.45 * self.height
                             # text_size: self.width, None
                             height: self.texture_size[1]
                             # size_hint: (1, 1)
