@@ -172,6 +172,7 @@ class RagalyApp(MDApp):
         from kivy import platform
         if platform == "android":
             self.start_service()
+            print("Android service called")
         print("on_start ragaly                END")
 
 
@@ -187,9 +188,13 @@ class RagalyApp(MDApp):
     @staticmethod
     def start_service():
         from jnius import autoclass
+        print("1")
         service = autoclass("org.jupieter.ragaly_news.ServiceRagaly")
+        print("2")
         mActivity = autoclass("org.kivy.android.PythonActivity").mActivity
+        print("3")
         service.start(mActivity, "")
+        print("4")
         return service
 
 if __name__ == '__main__':
