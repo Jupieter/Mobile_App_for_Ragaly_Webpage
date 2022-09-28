@@ -125,8 +125,8 @@ class RagalyApp(MDApp):
         p_text = self.posts[post_pk][3]
         # print("p_title", p_title)
         grid = self.root.ids["post_grid"]
-        self.root.ids["scr2_post_title"].text = p_title
-        self.root.ids["scr2_post_link"].text = p_link_adr
+        self.root.ids["scr2_post_title"].text = p_tit_adr
+        # self.root.ids["scr2_post_link"].text = p_link_adr
         self.root.ids["scr2_post"].text = p_text
         p_pict = self.posts[post_pk][5]
         # print(p_pict)
@@ -134,13 +134,13 @@ class RagalyApp(MDApp):
             print(p_pict[0])
             self.root.ids["post_img"].source = p_pict[0]
         else:
-            self.root.ids["post_img"].source = "images/cimer.jpg"
+            self.root.ids["post_img"].source = "images/no-available-picture.jpg"
         self.root.ids["post_scroll"].scroll_y = 1
         sm = self.root.ids.screen_manager
         sm.current = "scr_2"
     
     def post_news(self):
-        """This add MDCards to main screen with post title anf date and picture if have"""
+        """This add MDCards to main screen with post title and date and picture if have"""
         print("max post: ", self.max_post)
         grid = self.root.ids["grid_banner"]
         for i in range(0,self.max_post,1):
@@ -160,7 +160,7 @@ class RagalyApp(MDApp):
                 print(banner.ids["post_image"].source)
                 banner.ids["post_image"].source = p_pict[0]
             else:
-                banner.ids["post_image"].source = "images/cimer.jpg"
+                banner.ids["post_image"].source = "images/no-image.jpg"
             grid.add_widget(banner)
 
  

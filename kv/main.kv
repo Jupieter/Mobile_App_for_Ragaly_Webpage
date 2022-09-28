@@ -95,7 +95,7 @@ MDScreen:
         elevation: 10
         title: "Ragály Önkormányzati Hírek"
         left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
-        right_action_items: [["web-refresh", lambda x: app.re_fresh()], ["brush", lambda x: app.show_theme_picker()]]
+        right_action_items: [["web-refresh", lambda x: app.re_fresh()]]
 
     MDNavigationLayout:
         x: toolbar.height
@@ -133,30 +133,30 @@ MDScreen:
                 MDLabel:
                     id: scr2_post_title
                     markup: True
-                    size_hint: (0.9, None)
+                    size_hint: (1.5, None)
                     pos_hint: {'center_x': .5, "top": 0.95}
                     text_size: self.width, None
-                    # font_size: 0.5 * self.height
-                    halign: "left"
+                    font_size: 0.28 * self.height
+                    halign: "center"
                     text: "Post Title"
                     on_ref_press:
                         import webbrowser
                         webbrowser.open(args[1])
-                MDLabel:
-                    id: scr2_post_link
-                    markup: True
-                    size_hint: (0.9, None)
-                    pos_hint: {'center_x': .5, "top": 0.95}
-                    # text_size: self.width, None
-                    font_size: 0.3* self.height
-                    halign: "right"
-                    text: "link"
-                    on_ref_press:
-                        import webbrowser
-                        webbrowser.open(args[1])
+                # MDLabel:
+                #     id: scr2_post_link
+                #     markup: True
+                #     size_hint: (0.9, None)
+                #     pos_hint: {'center_x': .5, "top": 0.95}
+                #     # text_size: self.width, None
+                #     font_size: 0.3* self.height
+                #     halign: "right"
+                #     text: "link"
+                #     on_ref_press:
+                #         import webbrowser
+                #         webbrowser.open(args[1])
                 ScrollView:
                     id: post_scroll 
-                    pos_hint: {"center_x": 0.5, "top": 0.86}
+                    pos_hint: {"center_x": 0.5, "top": 0.83}
                     size_hint_y: 0.77
                     do_scroll_x: False
                     do_scroll_y: True
@@ -176,7 +176,7 @@ MDScreen:
                             size_hint_y: None
                             # height: self.texture_size[1]
                             # size: self.size if self.source == "images/cimer.jpg" else Window.size # Window.size
-                            height: 50 if self.source == "images/cimer.jpg" else Window.height # Window.size
+                            height: 50 if self.source == "images/no-available-picture.jpg" else Window.height # Window.size
                             keep_ratio: True
                             # size_hint: (1, None)
                             # pos_hint: {'center_x': .5, "top": 0.85}
