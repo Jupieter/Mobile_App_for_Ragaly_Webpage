@@ -1,5 +1,5 @@
 '''
-This python service file asks for the coffee-made id. 
+This python service file asks for the new ragaly-post id. 
 If the id is greater than the file containing the id number, it sends a notification.
 '''
 
@@ -51,13 +51,12 @@ max_id = load_data()
 if max_id:
     print("Coffeebar  service running.....")
     old_id = open_file()
-    print("old id:  ", old_id, "requested id:  ", max_id)
     if max_id > old_id:
         post_title = db.get_post_title(max_id)
-        print("post_title: ", post_title)
+        print("old id:  ", old_id, "requested id:  ", max_id, "Title: ", post_title)
         write_file(max_id)
         try: 
-            an.notify(title='Ragály Önkormányzat új híre', message = dt,  toast=False, app_icon='image/coffe_icon1.png')
+            an.notify(title='Ragály Önkormányzat új híre', message = post_title,  toast=False, app_icon='images/cimer.png')
             print("yes")
         except:
             print("No work the notification")

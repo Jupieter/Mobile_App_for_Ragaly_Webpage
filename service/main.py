@@ -4,14 +4,14 @@ def start_service():
     from jnius import autoclass, cast
 
     print("1 - start_service")
-    service = autoclass("org.jupieter.coffee_ante.ServiceCoffeebar")
+    service = autoclass("org.jupieter.ragaly_news.ServiceRagaly")
     mActivity = autoclass("org.kivy.android.PythonActivity").mActivity
     service.start(mActivity, "")
     try:
-        msg_service = autoclass("org.jupieter.coffee_ante.MsgPushService")
+        msg_service = autoclass("org.jupieter.ragaly_news.RagalyBroadcastService")
         print("service",service)
     except:
-        print("NO   MsgPushService")
+        print("NO   RagalyBroadcastService")
     try:
         msg_service.start(mActivity)
     except:
