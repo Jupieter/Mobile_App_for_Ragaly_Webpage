@@ -6,10 +6,10 @@ If the id is greater than the file containing the id number, it sends a notifica
 from time import sleep
 import requests
 from jnius import autoclass
-# from  service.notification_android import AndroidNotification
+from  service.notification_android import AndroidNotification
 from get_data import DB_questions
 db = DB_questions()
-# an = AndroidNotification()
+an = AndroidNotification()
 
 try:
     ofi = open('max_ragaly_post_id.txt', 'x')
@@ -57,7 +57,7 @@ if max_id:
         print("post_title: ", post_title)
         write_file(max_id)
         try: 
-            # an.notify(title='Ragály Önkormányzat új híre', message = dt,  toast=False, app_icon='image/coffe_icon1.png')
+            an.notify(title='Ragály Önkormányzat új híre', message = dt,  toast=False, app_icon='image/coffe_icon1.png')
             print("yes")
         except:
             print("No work the notification")
