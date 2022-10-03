@@ -85,9 +85,9 @@ class RagalyApp(MDApp):
             get_db = DB_questions()
             # print(get_db)
             posts, self.max_post = get_db.runner()                 # All last revisioned post
-            self.posts = transform.transform(posts) 
+            # self.posts = transform.transform(posts) # Ez kell
             # self.four_news(0)
-            self.post_news()
+            # self.post_news()        # Ez kell
             # print(self.root.ids)
 
 
