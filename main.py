@@ -4,7 +4,7 @@ print("import I. Ragaly")
 # from tkinter import Image
 os.environ['KIVY_NO_CONSOLELOG'] = '0'
 cwd = os.getcwd()
-print("cwd, ",cwd)
+# print("cwd, ",cwd)
 os.environ['KIVY_HOME'] = cwd + '/conf'
 
 
@@ -55,11 +55,6 @@ class RagalyApp(MDApp):
         self.max_post = 4
         self.post_pos = 0
         print("--init--   END")
-
-    def show_theme_picker(self):
-        print("PICKER")
-        theme_dialog = MDThemePicker()
-        # theme_dialog.open()
     
     def re_fresh(self):
         """used   
@@ -116,7 +111,7 @@ class RagalyApp(MDApp):
     
     def id_post(self, post_pk):
         """ Displays the posts. The headline is a clickable link."""
-        print("The Post", post_pk)
+        # print("The Post", post_pk)
         p_title = self.posts[post_pk][1]
         p_adr = self.hun_to_eng(p_title)
         p_tit_adr = "[ref=" + p_adr + "][b]" + p_title + "[/b][/ref]"
@@ -131,7 +126,7 @@ class RagalyApp(MDApp):
         p_pict = self.posts[post_pk][5]
         # print(p_pict)
         if p_pict != []:
-            print(p_pict[0])
+            # print(p_pict[0])
             self.root.ids["post_img"].source = p_pict[0]
         else:
             self.root.ids["post_img"].source = "images/no-available-picture.jpg"
@@ -156,8 +151,8 @@ class RagalyApp(MDApp):
             banner.ids["post_date"].text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
             p_pict = self.posts[i][5]
             if p_pict != []:
-                print(p_pict[0])
-                print(banner.ids["post_image"].source)
+                # print(p_pict[0])
+                # print(banner.ids["post_image"].source)
                 banner.ids["post_image"].source = p_pict[0]
             else:
                 banner.ids["post_image"].source = "images/no-image.jpg"

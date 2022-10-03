@@ -18,7 +18,41 @@ class DB_questions():
        database="ngwpragaly")
     # print(con)
     return con
+  
+  def post_parent(self):
+    con = self.db_get() 
+    cur = con.cursor()
+    sql = """
+    SELECT object_id
+    FROM wragalyp_term_relationships 
+    WHERE term_taxonomy_id = 33 OR term_taxonomy_id = 34 OR term_taxonomy_id = 1
+    ORDER BY object_id DESC
+    """
+    cur.execute(sql)
+    parent_result = cur.fetchall()
+    print("categorie_list:  ",type(parent_result))
+    return parent_result
 
+  def post_inherit(self, parent_result): 
+    '''get all 'Hírek' and 'Hirdetmények' posts id & title from database'''
+    con = self.db_get() 
+    cur = con.cursor()
+    params = {'c_l': parent_result}
+    sql =  """
+          SELECT id, post_title, post_parent, post_date
+          FROM wragalyp_posts 
+          WHERE post_parent in %(c_l)s
+          ORDER BY id DESC
+          """
+    cur.execute(sql, params)
+    titles_result = cur.fetchall()
+    return titles_result
+
+    
+
+
+
+    
   def post_rev(self): 
     '''get all posts from database'''
     con = self.db_get() 
@@ -83,21 +117,33 @@ class DB_questions():
     return posts, max_post    
 
   def runner(self):
-    myresult = self.post_rev()
+    parent_result = self.post_parent()
+    for prnt in parent_result:
+      print(prnt)
+
+    inherit_result = self.post_inherit(parent_result)
+    for post in inherit_result:
+      print(post)
+
+    # myresult = self.post_rev()
     # for post in myresult:
-    #   print(post[0:3])
-    post_lst = self.tuple_to_list(myresult)
-    post_zero = self.zero_post_type(post_lst)
-    # for post in post_zero:
-    #   print(post[0:3])
-    posts = self.post_ids(post_zero)
-    # print("posts: ---", posts)
-    # for post in posts:
-    #   print(post)
-    # htmls = self. html_transform(posts)
-    # for x in htmls:
-    #   print(x)
-    return posts
+    #   print(post[1])
+      
+
+    # post_lst = self.tuple_to_list(myresult)
+
+    # post_zero = self.zero_post_type(post_lst)
+    # # for post in post_zero:
+    # #   print(post[0:3])
+# 
+    # posts = self.post_ids(post_zero)
+    # # print("posts: ---", posts)
+    # # for post in posts:
+    # #   print(post)
+    # # htmls = self. html_transform(posts)
+    # # for x in htmls:
+    # #   print(x)
+    # return posts
 
 
 
