@@ -22,7 +22,7 @@ def link_find(html_post):
         #   print('link', link)
         one_link = link.get('href')
         links.append(one_link)
-        print('              one_link', one_link)
+        # print('              one_link', one_link)
     return links
     
 def pretty_html(html_post):
