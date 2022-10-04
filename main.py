@@ -146,7 +146,7 @@ class RagalyApp(MDApp):
             p_id = self.posts[i][0]
             p_title = str(self.posts[i][1])
             if len(p_title) >= 38:
-                 p_title = p_title[0:38] + " ..." 
+                 p_title = p_title[0:38] + " ..."  # if the lenght of the title is too long
             p_parent = self.posts[i][2]
             p_date = self.posts[i][4].date()
             banner.ids["post_title"].text = p_title 
