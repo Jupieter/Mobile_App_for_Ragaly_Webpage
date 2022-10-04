@@ -144,10 +144,12 @@ class RagalyApp(MDApp):
             banner.id= card_id
             banner.value = i
             p_id = self.posts[i][0]
-            p_title = self.posts[i][1]
+            p_title = str(self.posts[i][1])
+            if len(p_title) >= 38:
+                 p_title = p_title[0:38] + " ..." 
             p_parent = self.posts[i][2]
             p_date = self.posts[i][4].date()
-            banner.ids["post_title"].text = str(p_title)
+            banner.ids["post_title"].text = p_title 
             banner.ids["post_date"].text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
             p_pict = self.posts[i][5]
             if p_pict != []:
