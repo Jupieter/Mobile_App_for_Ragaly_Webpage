@@ -28,11 +28,31 @@ class DB_questions():
     con = self.db_get() 
     if con:
       cur = con.cursor()
+      # sql = """
+      # SELECT object_id
+      # FROM wragalyp_term_relationships 
+      # WHERE term_taxonomy_id IN (1, 33, 34)
+      # ORDER BY object_id DESC
+      # """
+      # sql = """
+      # SELECT object_id
+      # FROM wragalyp_term_relationships 
+      # WHERE term_taxonomy_id = 33 OR term_taxonomy_id = 34 OR term_taxonomy_id = 1
+      # ORDER BY object_id DESC
+      # """
       sql = """
-      SELECT object_id
-      FROM wragalyp_term_relationships 
-      WHERE term_taxonomy_id = 33 OR term_taxonomy_id = 34 OR term_taxonomy_id = 1
-      ORDER BY object_id DESC
+        SELECT wragalyp_posts.ID
+        FROM wragalyp_posts 
+        INNER JOIN wragalyp_term_relationships
+        ON wragalyp_posts.ID = wragalyp_term_relationships.object_id 
+        WHERE wragalyp_posts.post_status = "publish" AND wragalyp_posts.ID
+        IN (
+         SELECT object_id
+         FROM wragalyp_term_relationships 
+         WHERE term_taxonomy_id IN (1, 33, 34)
+         ORDER BY object_id DESC
+        )
+        ORDER BY wragalyp_posts.ID DESC
       """
       cur.execute(sql)
       parent_result = cur.fetchall()
@@ -48,7 +68,7 @@ class DB_questions():
       sql =  """
             SELECT id, post_parent
             FROM wragalyp_posts 
-            WHERE post_parent IN %(c_l)s
+            WHERE post_parent IN %(c_l)s 
             ORDER BY id DESC
             """
       cur.execute(sql, params)
@@ -119,7 +139,7 @@ class DB_questions():
   def runner(self):
     ''' main query chain'''
     parent_result = self.post_parent()
-    # print(parent_result)
+    print(parent_result)
     inherit_result = self.post_inherit(parent_result)
     for inherit in inherit_result:
       print(inherit)
