@@ -119,7 +119,7 @@ class DB_questions():
   def runner(self):
     ''' main query chain'''
     parent_result = self.post_parent()
-    print(parent_result)
+    # print(parent_result)
     inherit_result = self.post_inherit(parent_result)
     for inherit in inherit_result:
       print(inherit)
@@ -130,14 +130,14 @@ class DB_questions():
     #   print(postdt[0],postdt[1])
     if last_post_list:
       max_post = len(last_post_list)
-      print("last_post_list =", max_post, "post")
+      # print("last_post_list =", max_post, "post")
     else:
       max_post = 0
       last_post_list = None
-      print("No Data. Maybe not internet connection")   
+      # print("No Data. Maybe not internet connection")   
     
-    title = self.get_post_title(41243)
-    print("Title=  ", title)
+    # title = self.get_post_title(41243)
+    # print("Title=  ", title)
 
     return post_list_data, max_post
 

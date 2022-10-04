@@ -48,8 +48,8 @@ def load_data():
 
 
 max_id = load_data()
+print("Coffeebar  service running.....", max_id)
 if max_id:
-    print("Coffeebar  service running.....")
     old_id = open_file()
     if max_id > old_id:
         post_title = db.get_post_title(max_id)
