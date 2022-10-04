@@ -168,7 +168,7 @@ class RagalyApp(MDApp):
         from service.main import start_service
         if platform == "android":
             print("Android service called")
-            self.start_service()
+            start_service()
         print("on_start ragaly                END")
 
 
