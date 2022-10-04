@@ -9,11 +9,12 @@ def start_service():
     service.start(mActivity, "")
     try:
         msg_service = autoclass("org.jupieter.ragaly_news.RagalyBroadcastService")
-        print("service",service)
+        print("RagalyBroadcastService:  ",service)
     except:
         print("NO   RagalyBroadcastService")
     try:
         msg_service.start(mActivity)
+        print("RagalyBroadcastService.started")
     except:
         print("NO   msg_service.start")
     return service
