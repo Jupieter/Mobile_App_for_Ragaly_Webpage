@@ -165,9 +165,9 @@ class RagalyApp(MDApp):
         self.get_sql_data()
         self.root.ids.scr3_box.add_widget(MadeByBox()) 
         from kivy import platform
+        from service.main import start_service
         if platform == "android":
             print("Android service called")
-            from service.main import start_service
             self.start_service()
         print("on_start ragaly                END")
 
