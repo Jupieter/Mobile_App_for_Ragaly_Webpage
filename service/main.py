@@ -5,7 +5,9 @@ def start_service():
 
     print("1 - start_service")
     mActivity = autoclass("org.kivy.android.PythonActivity").mActivity
-    
+
+    msg_service = autoclass("org.jupieter.ragaly_news.RagalyBroadcastService")
+    print("RagalyBroadcastService:  ", msg_service)
     try:
         msg_service = autoclass("org.jupieter.ragaly_news.RagalyBroadcastService")
         print("RagalyBroadcastService:  ", msg_service)
