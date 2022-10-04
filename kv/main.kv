@@ -133,10 +133,13 @@ MDScreen:
                 MDLabel:
                     id: scr2_post_title
                     markup: True
-                    size_hint: (1.5, None)
-                    pos_hint: {'center_x': .5, "top": 0.95}
-                    text_size: self.width, None
-                    font_size: 0.28 * self.height
+                    # height: self.texture_size[1]
+                    size: root.width * 0.9, root.height * 0.1
+                    pos: self.width * 0.01  , self.height * 0.39
+                    # size_hint: (0.6,  1)
+                    # pos_hint: {'center_x': .5, "top": 0.95}
+                    # text_size: 4 * self.height, None
+                    font_size: 0.025 * root.height
                     halign: "center"
                     text: "Post Title"
                     on_ref_press:
@@ -191,7 +194,7 @@ MDScreen:
                             height: self.texture_size[1]
                             # size_hint: (1, 1)
                             # pos_hint: {'center_x': .5, "top": 0.85}
-                            font_size: 15 #0.3 * self.height
+                            font_size: 25 #0.3 * self.height
                             halign: "left"
                             text: "Post"
 
