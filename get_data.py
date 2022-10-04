@@ -28,18 +28,7 @@ class DB_questions():
     con = self.db_get() 
     if con:
       cur = con.cursor()
-      # sql = """
-      # SELECT object_id
-      # FROM wragalyp_term_relationships 
-      # WHERE term_taxonomy_id IN (1, 33, 34)
-      # ORDER BY object_id DESC
-      # """
-      # sql = """
-      # SELECT object_id
-      # FROM wragalyp_term_relationships 
-      # WHERE term_taxonomy_id = 33 OR term_taxonomy_id = 34 OR term_taxonomy_id = 1
-      # ORDER BY object_id DESC
-      # """
+      params = {'categorie': (1,33,34)}
       sql = """
         SELECT wragalyp_posts.ID
         FROM wragalyp_posts 
@@ -49,12 +38,12 @@ class DB_questions():
         IN (
          SELECT object_id
          FROM wragalyp_term_relationships 
-         WHERE term_taxonomy_id IN (1, 33, 34)
+         WHERE term_taxonomy_id IN %(categorie)s
          ORDER BY object_id DESC
         )
         ORDER BY wragalyp_posts.ID DESC
       """
-      cur.execute(sql)
+      cur.execute(sql, params)
       parent_result = cur.fetchall()
       cur.close()
       return parent_result
@@ -146,8 +135,9 @@ class DB_questions():
     last_post_list = self.post_last(inherit_result)
     post_data = self.post_data(last_post_list)
     post_list_data = self.list_from_tuple(post_data)
-    # for postdt in post_list_data:
-    #   print(postdt[0],postdt[1])
+    if post_list_data:
+      for postdt in post_list_data:
+        print(postdt[0],postdt[1])
     if last_post_list:
       max_post = len(last_post_list)
       # print("last_post_list =", max_post, "post")
