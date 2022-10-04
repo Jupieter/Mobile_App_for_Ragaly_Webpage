@@ -12,7 +12,7 @@ def transform(posts):
         pics = soap.pict_link(links)        # from link list slect all jpg link
         # print(pics)
         post.append(pics)                   # pictures added to list item-5
-        print(i, "--------------------- pictures --------------------------")
+        # print(i, "--------------------- pictures --------------------------")
         # print(post[0:2])
         # print("pic: ",  post[5])
         i += 1
@@ -25,8 +25,8 @@ def transform(posts):
         html_txt = soap.text_find(bolded)  
         post[3] = html_txt
         print(i, "-------------------- text find ---------------------------" , post[0], post[1], post[2], post[4])
-        print( post[5])
-        print("html_txt ", i,": ", html_txt)
+        # print( post[5])
+        # print("html_txt ", i,": ", html_txt)
         i += 1
     
     return posts
