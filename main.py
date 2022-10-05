@@ -117,15 +117,12 @@ class RagalyApp(MDApp):
             self.root.ids[link_id].text = ""
         if link_long > 3:
             link_long = 3
-        print("link_long: ", link_long)
         for i in range(0,link_long,1):
-            print("i = ", i)
             link_id = "link" + str(i)
             link_tit_adr = "[ref=" + links[i] + "][u]" + links[i] + "[/u][/ref]"
-            print(link_id, "link", link_tit_adr)
+            print("link", link_id)
             self.root.ids[link_id].text = link_tit_adr
 
-        print(links, len(links))
         self.root.ids["post_scroll"].scroll_y = 1
         sm = self.root.ids.screen_manager
         sm.current = "scr_2"
