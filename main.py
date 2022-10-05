@@ -70,11 +70,13 @@ class RagalyApp(MDApp):
           grid.remove_widget(dt)
         ch = []
         self.get_sql_data()
+        self.root.ids["button_mn"].title = "Hírek, Hirdetmények"
         sm = self.root.ids.screen_manager
         sm.current = "scr_1"
 
     
     def go_home(self):
+        self.root.ids["button_mn"].title = "Hírek, Hirdetmények"
         sm = self.root.ids.screen_manager
         sm.current = "scr_1"
 
@@ -108,6 +110,7 @@ class RagalyApp(MDApp):
         # print("p_title", p_title)
         grid = self.root.ids["post_grid"]
         self.root.ids["scr2_post_title"].text = p_tit_adr
+        self.root.ids["button_mn"].title = p_tit_adr
         # self.root.ids["scr2_post_link"].text = p_link_adr
         self.root.ids["scr2_post"].text = p_text
         p_pict = self.posts[post_pk][5]

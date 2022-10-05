@@ -1,5 +1,5 @@
 #:set btn_txt 0.45    # rapid change button text size, size_hint height everywhere
-#:set g_btn_txt 0.45
+#:set post_txt 30
 #:set sz_hint_hight 0.3
 
 
@@ -134,7 +134,7 @@ MDScreen:
                     id: scr2_post_title
                     markup: True
                     # height: self.texture_size[1]
-                    size: root.width * 0.9, root.height * 0.1
+                    size: root.width * 0.86, root.height * 0.1
                     pos: self.width * 0.01  , self.height * 0.39
                     # size_hint: (0.6,  1)
                     # pos_hint: {'center_x': .5, "top": 0.95}
@@ -145,18 +145,7 @@ MDScreen:
                     on_ref_press:
                         import webbrowser
                         webbrowser.open(args[1])
-                # MDLabel:
-                #     id: scr2_post_link
-                #     markup: True
-                #     size_hint: (0.9, None)
-                #     pos_hint: {'center_x': .5, "top": 0.95}
-                #     # text_size: self.width, None
-                #     font_size: 0.3* self.height
-                #     halign: "right"
-                #     text: "link"
-                #     on_ref_press:
-                #         import webbrowser
-                #         webbrowser.open(args[1])
+
                 ScrollView:
                     id: post_scroll 
                     pos_hint: {"center_x": 0.5, "top": 0.83}
@@ -189,7 +178,7 @@ MDScreen:
                             id: scr2_post
                             markup: True
                             size_hint_y: None
-                            font_size: 30  # 0.45 * self.height
+                            font_size: '20dp' # post_txt  # 0.45 * self.height
                             # text_size: self.width, None
                             height: self.texture_size[1]
                             # size_hint: (1, 1)
@@ -224,7 +213,9 @@ MDScreen:
     MDBottomAppBar:
 
         MDTopAppBar:
-            title: "Title"
+            id: button_mn
+            title: "Hírek, Hirdetmények"
             icon: "home"
             type: "bottom"
+            mode: "end"
             on_action_button: app.go_home()
