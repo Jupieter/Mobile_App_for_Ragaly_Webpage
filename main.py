@@ -63,35 +63,29 @@ class RagalyApp(MDApp):
             - to refresh button (if no internet when app started) and 
             - to Clock cikle
         """
-        grid = self.root.ids["grid_banner"]
-        ch = []
-        for child in grid.children:
-            print(child.id)
-            ch.append(child)
-        for dt in ch:
-          grid.remove_widget(dt)
-        ch = []
-        self.get_sql_data()
+        grids = ["grid_banner", "grid_banner_2"]
+        for grd in grids:
+            grid = self.root.ids[grd]
+            ch = []
+            for child in grid.children:
+                print(child.id)
+                ch.append(child)
+            for dt in ch:
+              grid.remove_widget(dt)
+            ch = []
+        self.post_news("post")
         self.root.ids["button_mn"].title = "Hírek, Hirdetmények"
         sm = self.root.ids.screen_manager
         sm.current = "scr_1"
+        self.post_news("page")
 
+    def ch_title(self, title):
+        self.root.ids["button_mn"].title = title
     
     def go_home(self):
         self.root.ids["button_mn"].title = "Hírek, Hirdetmények"
         sm = self.root.ids.screen_manager
         sm.current = "scr_1"
-
-    def get_sql_data(self, post_page):
-        """ If have internet get data with get_db.py and transform the post content to 
-         kivy formatted text"""
-        if is_cnx_active(1) :
-            get_db = DB_questions()
-            # print(get_db)
-            posts, self.max_post = get_db.runner(post_page)                 # All last revisioned post
-            self.posts = transform.transform(posts) # Ez kell
-            self.post_news()        # Ez kell
-
 
     
     def id_post(self, post_pk):

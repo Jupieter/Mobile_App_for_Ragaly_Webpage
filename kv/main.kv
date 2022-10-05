@@ -69,18 +69,21 @@
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "scr_1"
+                    app.ch_title("Hírek, hírdetmények")
 
             OneLineListItem:
                 text: "Információk"
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "scr_3"
+                    app.ch_title("Információk")
 
             OneLineListItem:
                 text: "Open Source THX:"
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "scr_4"
+                    app.ch_title("Open Source THX")
             
 
 
