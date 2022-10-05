@@ -90,32 +90,19 @@ class RagalyApp(MDApp):
             self.post_news()        # Ez kell
             # print(self.root.ids)
 
-
-    def hun_to_eng(self, p_adr):
-        """ make wordpress permalink from the post title"""
-        magyar='íéáűőúöüó '
-        angol='ieauououo-'
-        p_adr = p_adr.lower()
-        for i in range(0,10
-        ):
-            p_adr=p_adr.replace(magyar[i],angol[i])
-            # p_adr=p_adr.replace(" ","-")
-        unnecessary = ['"',"'","."]
-        for j in unnecessary:
-            p_adr=p_adr.replace(j,"")
-            # p_adr=p_adr.replace("'","")
-            # p_adr=p_adr.replace(".","")
-        p_adr = "https://ragaly.hu/" + str(p_adr)
-        print('Adress.......: ', p_adr)
-        return p_adr
     
     def id_post(self, post_pk):
         """ Displays the posts. The headline is a clickable link."""
         # print("The Post", post_pk)
         p_title = self.posts[post_pk][1]
-        p_adr = self.hun_to_eng(p_title)
+        if is_cnx_active(1) :
+            p_parent = self.posts[post_pk][2]
+            db = DB_questions()
+            p_adr = db.get_post_name(p_parent)
+            p_adr = "https://ragaly.hu/" + str(p_adr)
+            print(p_adr)
         p_tit_adr = "[ref=" + p_adr + "][b]" + p_title + "[/b][/ref]"
-        p_link_adr = "[ref=" + p_adr + "]link[/ref]"
+        # p_link_adr = "[ref=" + p_adr + "]link[/ref]"
         # print(p_tit_adr)
         p_text = self.posts[post_pk][3]
         # print("p_title", p_title)

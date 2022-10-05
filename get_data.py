@@ -23,29 +23,33 @@ class DB_questions():
         
 
   
-  def post_parent(self):
+  def post_parent(self, post_page):
     '''It query the id the parent of the post 'Hírek' & 'Hirdetmények' '''
-    con = self.db_get() 
-    if con:
-      cur = con.cursor()
-      params = {'categorie': (1,33,34)}
-      sql = """
-        SELECT wragalyp_posts.ID
-        FROM wragalyp_posts 
-        INNER JOIN wragalyp_term_relationships
-        ON wragalyp_posts.ID = wragalyp_term_relationships.object_id 
-        WHERE wragalyp_posts.post_status = "publish" AND wragalyp_posts.ID
-        IN (
-         SELECT object_id
-         FROM wragalyp_term_relationships 
-         WHERE term_taxonomy_id IN %(categorie)s
-         ORDER BY object_id DESC
-        )
-        ORDER BY wragalyp_posts.ID DESC
-      """
-      cur.execute(sql, params)
-      parent_result = cur.fetchall()
-      cur.close()
+    if post_page == "post":
+      con = self.db_get() 
+      if con:
+        cur = con.cursor()
+        sql = """
+          SELECT wragalyp_posts.ID
+          FROM wragalyp_posts 
+          INNER JOIN wragalyp_term_relationships
+          ON wragalyp_posts.ID = wragalyp_term_relationships.object_id 
+          WHERE wragalyp_posts.post_status = "publish" AND wragalyp_posts.ID
+          IN (
+           SELECT object_id
+           FROM wragalyp_term_relationships 
+           WHERE term_taxonomy_id IN %(categorie)s
+           ORDER BY object_id DESC
+          )
+          ORDER BY wragalyp_posts.ID DESC
+        """
+        params = {'categorie': (1,33,34)}
+        cur.execute(sql, params)
+        parent_result = cur.fetchall()
+        cur.close()
+      else:
+        parent_result = (306, 303)
+        # parent_result = tuple((42573,), (41228,), (38623,), (10209,), (10205,), (10201,), (10164,), (10160,), (10156,), (10145,), (10131,), (1626,), (1551,), (390,), (384,), (350,), (312,), (309,), (306,), (303,))
       return parent_result
 
   def post_inherit(self, parent_result): 
@@ -58,7 +62,7 @@ class DB_questions():
             SELECT id, post_parent
             FROM wragalyp_posts 
             WHERE post_parent IN %(c_l)s 
-            ORDER BY id DESC
+            ORDER BY post_parent DESC, id DESC
             """
       cur.execute(sql, params)
       inherits_result = cur.fetchall()
@@ -123,12 +127,28 @@ class DB_questions():
       cur.close()
       return title
 
+  def get_post_name(self, post_id):
+    ''' This must to request of service'''
+    con = self.db_get() 
+    if con:
+      cur = con.cursor()
+      sql =  """
+            SELECT post_name
+            FROM wragalyp_posts 
+            WHERE id = (%s)
+            """
+      cur.execute(sql, str(post_id))
+      post_name = cur.fetchone()
+      name = list(post_name)[0]
+      cur.close()
+      return name
 
 
-  def runner(self):
+
+  def runner(self, post_page = "post"):
     ''' main query chain'''
-    parent_result = self.post_parent()
-    print(parent_result)
+    parent_result = self.post_parent(post_page)
+    print("parent_result:  ", parent_result)
     inherit_result = self.post_inherit(parent_result)
     for inherit in inherit_result:
       print(inherit)
