@@ -52,7 +52,9 @@ class RagalyApp(MDApp):
         print("--init--")
         super(RagalyApp, self).__init__(**kwargs)
         self.posts = []
-        self.max_post = 4
+        self.pagees = []
+        self.max_post = 0
+        self.max_page = 0
         self.post_pos = 0
         print("--init--   END")
     
@@ -88,9 +90,8 @@ class RagalyApp(MDApp):
             # print(get_db)
             posts, self.max_post = get_db.runner(post_page)                 # All last revisioned post
             self.posts = transform.transform(posts) # Ez kell
-            # self.four_news(0)
             self.post_news()        # Ez kell
-            # print(self.root.ids)
+
 
     
     def id_post(self, post_pk):
@@ -104,19 +105,12 @@ class RagalyApp(MDApp):
             p_adr = "https://ragaly.hu/" + str(p_adr)
             print(p_adr)
         p_tit_adr = "[ref=" + p_adr + "][b]" + p_title + "[/b][/ref]"
-        # p_link_adr = "[ref=" + p_adr + "]link[/ref]"
-        # print(p_tit_adr)
         p_text = self.posts[post_pk][3]
-        # print("p_title", p_title)
-        grid = self.root.ids["post_grid"]
         self.root.ids["scr2_post_title"].text = p_tit_adr
         self.root.ids["button_mn"].title = p_tit_adr
-        # self.root.ids["scr2_post_link"].text = p_link_adr
         self.root.ids["scr2_post"].text = p_text
         p_pict = self.posts[post_pk][5]
-        # print(p_pict)
         if p_pict != []:
-            # print(p_pict[0])
             self.root.ids["post_img"].source = p_pict[0]
         else:
             self.root.ids["post_img"].source = "images/no-available-picture.jpg"
@@ -124,11 +118,29 @@ class RagalyApp(MDApp):
         sm = self.root.ids.screen_manager
         sm.current = "scr_2"
     
-    def post_news(self):
+    def post_news(self, post_page):
         """This add MDCards to main screen with post title and date and picture if have"""
-        print("max post: ", self.max_post)
-        grid = self.root.ids["grid_banner"]
-        for i in range(0,self.max_post,1):
+        if is_cnx_active(1) :
+            get_db = DB_questions()
+            p, max_p = get_db.runner(post_page)                 # All last revisioned post/page
+            tp = transform.transform(p) 
+            # posts, self.max_post = get_db.runner(post_page)                 # All last revisioned post
+            # self.posts = transform.transform(posts) # Ez kell
+        if post_page == "post":
+            p_min = 0
+            self.max_post = max_p
+            p_max = self.max_post
+            grid = self.root.ids["grid_banner"]
+            self.posts = tp
+        elif post_page == "page":
+            p_min = self.max_post + 1
+            self.max_page = self.max_post + max_p
+            p_max = self.max_page
+            grid = self.root.ids["grid_banner_2"]
+            self.posts.extend(tp)
+            print(self.posts)
+        print("min post: ", p_min, "max post: ",  p_max)
+        for i in range(p_min, p_max, 1):
             card_id = "post" + str(i)
             banner = PostCard()
             banner.id= card_id
@@ -150,37 +162,12 @@ class RagalyApp(MDApp):
                 banner.ids["post_image"].source = "images/no-image.jpg"
             grid.add_widget(banner)
 
-    def page_news(self):
-        """This add MDCards to screen 3 with selected page"""
-        print("max post: ", self.max_post)
-        grid = self.root.ids["grid_banner"]
-        for i in range(0,self.max_post,1):
-            card_id = "post" + str(i)
-            banner = PostCard()
-            banner.id= card_id
-            banner.value = i
-            p_id = self.posts[i][0]
-            p_title = str(self.posts[i][1])
-            if len(p_title) >= 38:
-                 p_title = p_title[0:38] + " ..."  # if the lenght of the title is too long
-            p_parent = self.posts[i][2]
-            p_date = self.posts[i][4].date()
-            banner.ids["post_title"].text = p_title 
-            banner.ids["post_date"].text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
-            p_pict = self.posts[i][5]
-            if p_pict != []:
-                # print(p_pict[0])
-                # print(banner.ids["post_image"].source)
-                banner.ids["post_image"].source = p_pict[0]
-            else:
-                banner.ids["post_image"].source = "images/no-image.jpg"
-            grid.add_widget(banner)
-
- 
 
     def on_start(self):
         print("on_start ragaly                START")
-        self.get_sql_data("post")
+        self.post_news("post")
+        self.post_news("page")
+        # self.get_sql_data("post")
         self.root.ids.scr4_box.add_widget(MadeByBox()) 
         from kivy import platform
         from service.main import start_service
