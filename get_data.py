@@ -50,7 +50,7 @@ class DB_questions():
     else:
       # parent_result = tuple(306, 303)
       parent_result = ((10209,), (10205,), (10201,), (390,), (384,), (312,), (303,))
-      return parent_result
+    return parent_result
 
   def post_inherit(self, parent_result): 
     ''' All inherit of posts'''
@@ -145,7 +145,7 @@ class DB_questions():
 
 
 
-  def runner(self, post_page = "page"):
+  def runner(self, post_page = "post"):
     ''' main query chain'''
     parent_result = self.post_parent(post_page)
     print("parent_result:  ", parent_result)

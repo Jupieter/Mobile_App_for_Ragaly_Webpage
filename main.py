@@ -150,12 +150,38 @@ class RagalyApp(MDApp):
                 banner.ids["post_image"].source = "images/no-image.jpg"
             grid.add_widget(banner)
 
+    def page_news(self):
+        """This add MDCards to screen 3 with selected page"""
+        print("max post: ", self.max_post)
+        grid = self.root.ids["grid_banner"]
+        for i in range(0,self.max_post,1):
+            card_id = "post" + str(i)
+            banner = PostCard()
+            banner.id= card_id
+            banner.value = i
+            p_id = self.posts[i][0]
+            p_title = str(self.posts[i][1])
+            if len(p_title) >= 38:
+                 p_title = p_title[0:38] + " ..."  # if the lenght of the title is too long
+            p_parent = self.posts[i][2]
+            p_date = self.posts[i][4].date()
+            banner.ids["post_title"].text = p_title 
+            banner.ids["post_date"].text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
+            p_pict = self.posts[i][5]
+            if p_pict != []:
+                # print(p_pict[0])
+                # print(banner.ids["post_image"].source)
+                banner.ids["post_image"].source = p_pict[0]
+            else:
+                banner.ids["post_image"].source = "images/no-image.jpg"
+            grid.add_widget(banner)
+
  
 
     def on_start(self):
         print("on_start ragaly                START")
         self.get_sql_data()
-        self.root.ids.scr3_box.add_widget(MadeByBox()) 
+        self.root.ids.scr4_box.add_widget(MadeByBox()) 
         from kivy import platform
         from service.main import start_service
         if platform == "android":

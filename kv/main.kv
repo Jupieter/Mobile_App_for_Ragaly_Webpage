@@ -65,13 +65,13 @@
                 source: "images/cimer.jpg"
 
             OneLineListItem:
-                text: "Hírek"
+                text: "Hírek, hírdetmények"
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "scr_1"
 
             OneLineListItem:
-                text: "Elérhetőségünk"
+                text: "Információk"
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "scr_3"
@@ -186,7 +186,7 @@ MDScreen:
                             halign: "left"
                             text: "Post"
 
-            # SCREEN 2  -----------------------  Adresses:  -----------------------                        
+            # SCREEN 2  -----------------------  Other Info:  -----------------------                        
 
             MDScreen:
                 name: "scr_3"
@@ -198,10 +198,12 @@ MDScreen:
                 
 
                 MDBoxLayout:
-                    id: scr3_box
+                    id: scr4_box
                     orientation: "vertical"
                     pos_hint: {"center_x": .5, "center_y": .5}
                     size_hint: 0.95, 0.8                
+
+
 
         MDNavigationDrawer:
             id: nav_drawer
