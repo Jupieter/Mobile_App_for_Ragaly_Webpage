@@ -97,17 +97,35 @@ class RagalyApp(MDApp):
             db = DB_questions()
             p_adr = db.get_post_name(p_parent)
             p_adr = "https://ragaly.hu/" + str(p_adr)
-            print(p_adr)
+            # print(p_adr)
+
         p_tit_adr = "[ref=" + p_adr + "][b]" + p_title + "[/b][/ref]"
         p_text = self.posts[post_pk][3]
         self.root.ids["scr2_post_title"].text = p_tit_adr
         self.root.ids["button_mn"].title = p_tit_adr
         self.root.ids["scr2_post"].text = p_text
-        p_pict = self.posts[post_pk][5]
+        p_pict = self.posts[post_pk][6]
         if p_pict != []:
             self.root.ids["post_img"].source = p_pict[0]
         else:
             self.root.ids["post_img"].source = "images/no-available-picture.jpg"
+
+        links = self.posts[post_pk][5]
+        link_long = len(links)
+        for j in range(3):
+            link_id = "link" + str(j)
+            self.root.ids[link_id].text = ""
+        if link_long > 3:
+            link_long = 3
+        print("link_long: ", link_long)
+        for i in range(0,link_long,1):
+            print("i = ", i)
+            link_id = "link" + str(i)
+            link_tit_adr = "[ref=" + links[i] + "][u]" + links[i] + "[/u][/ref]"
+            print(link_id, "link", link_tit_adr)
+            self.root.ids[link_id].text = link_tit_adr
+
+        print(links, len(links))
         self.root.ids["post_scroll"].scroll_y = 1
         sm = self.root.ids.screen_manager
         sm.current = "scr_2"
@@ -118,8 +136,6 @@ class RagalyApp(MDApp):
             get_db = DB_questions()
             p, max_p = get_db.runner(post_page)                 # All last revisioned post/page
             tp = transform.transform(p) 
-            # posts, self.max_post = get_db.runner(post_page)                 # All last revisioned post
-            # self.posts = transform.transform(posts) # Ez kell
         if post_page == "post":
             p_min = 0
             self.max_post = max_p
@@ -132,8 +148,8 @@ class RagalyApp(MDApp):
             p_max = self.max_page
             grid = self.root.ids["grid_banner_2"]
             self.posts.extend(tp)
-            print(self.posts)
-        print("min post: ", p_min, "max post: ",  p_max)
+            # print(self.posts)
+        # print("min post: ", p_min, "max post: ",  p_max)
         for i in range(p_min, p_max, 1):
             card_id = "post" + str(i)
             banner = PostCard()
@@ -147,7 +163,7 @@ class RagalyApp(MDApp):
             p_date = self.posts[i][4].date()
             banner.ids["post_title"].text = p_title 
             banner.ids["post_date"].text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
-            p_pict = self.posts[i][5]
+            p_pict = self.posts[i][6]
             if p_pict != []:
                 # print(p_pict[0])
                 # print(banner.ids["post_image"].source)

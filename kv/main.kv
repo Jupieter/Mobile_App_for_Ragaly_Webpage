@@ -136,12 +136,8 @@ MDScreen:
                 MDLabel:
                     id: scr2_post_title
                     markup: True
-                    # height: self.texture_size[1]
                     size: root.width * 0.86, root.height * 0.1
                     pos: self.width * 0.01  , self.height * 0.39
-                    # size_hint: (0.6,  1)
-                    # pos_hint: {'center_x': .5, "top": 0.95}
-                    # text_size: 4 * self.height, None
                     font_size: 0.025 * root.height
                     halign: "center"
                     text: "Post Title"
@@ -188,6 +184,36 @@ MDScreen:
                             # pos_hint: {'center_x': .5, "top": 0.85}
                             halign: "left"
                             text: "Post"
+                        MDLabel:
+                            id: link0
+                            markup: True
+                            size_hint_y: None
+                            font_size: '16dp'
+                            halign: "left"
+                            text: "Link 1"
+                            on_ref_press:
+                                import webbrowser
+                                webbrowser.open(args[1])
+                        MDLabel:
+                            id: link1
+                            markup: True
+                            size_hint_y: None
+                            font_size: '16dp'
+                            halign: "left"
+                            text: "Link 2"
+                            on_ref_press:
+                                import webbrowser
+                                webbrowser.open(args[1])
+                        MDLabel:
+                            id: link2
+                            markup: True
+                            size_hint_y: None
+                            font_size: '16dp'
+                            halign: "left"
+                            text: "Link 3"
+                            on_ref_press:
+                                import webbrowser
+                                webbrowser.open(args[1])
 
             # SCREEN 3 -----------------------  Other Info:  -----------------------                        
 
