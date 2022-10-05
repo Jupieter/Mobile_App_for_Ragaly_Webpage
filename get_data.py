@@ -47,9 +47,9 @@ class DB_questions():
         cur.execute(sql, params)
         parent_result = cur.fetchall()
         cur.close()
-      else:
-        parent_result = (306, 303)
-        # parent_result = tuple((42573,), (41228,), (38623,), (10209,), (10205,), (10201,), (10164,), (10160,), (10156,), (10145,), (10131,), (1626,), (1551,), (390,), (384,), (350,), (312,), (309,), (306,), (303,))
+    else:
+      # parent_result = tuple(306, 303)
+      parent_result = ((10209,), (10205,), (10201,), (390,), (384,), (312,), (303,))
       return parent_result
 
   def post_inherit(self, parent_result): 
@@ -145,7 +145,7 @@ class DB_questions():
 
 
 
-  def runner(self, post_page = "post"):
+  def runner(self, post_page = "page"):
     ''' main query chain'''
     parent_result = self.post_parent(post_page)
     print("parent_result:  ", parent_result)
