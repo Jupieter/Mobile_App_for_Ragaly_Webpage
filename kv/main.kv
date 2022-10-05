@@ -190,7 +190,21 @@ MDScreen:
 
             MDScreen:
                 name: "scr_3"
-
+                ScrollView:
+                    id: page_scroll 
+                    pos_hint: {"center_x": 0.5, "top": 0.91}
+                    size_hint_y: 0.84
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    GridLayout:
+                        id: grid_banner_2
+                        cols: 1
+                        padding: 10, 10
+                        spacing: 10, 10
+                        size_hint_y: None
+                        height: self.minimum_height
+                        row_default_height: root.height / 5
+                        
             # SCREEN 3  --------------------  Programmed By: --------------------------                        
 
             MDScreen:

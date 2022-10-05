@@ -80,13 +80,13 @@ class RagalyApp(MDApp):
         sm = self.root.ids.screen_manager
         sm.current = "scr_1"
 
-    def get_sql_data(self):
+    def get_sql_data(self, post_page):
         """ If have internet get data with get_db.py and transform the post content to 
          kivy formatted text"""
         if is_cnx_active(1) :
             get_db = DB_questions()
             # print(get_db)
-            posts, self.max_post = get_db.runner()                 # All last revisioned post
+            posts, self.max_post = get_db.runner(post_page)                 # All last revisioned post
             self.posts = transform.transform(posts) # Ez kell
             # self.four_news(0)
             self.post_news()        # Ez kell
@@ -180,7 +180,7 @@ class RagalyApp(MDApp):
 
     def on_start(self):
         print("on_start ragaly                START")
-        self.get_sql_data()
+        self.get_sql_data("post")
         self.root.ids.scr4_box.add_widget(MadeByBox()) 
         from kivy import platform
         from service.main import start_service
