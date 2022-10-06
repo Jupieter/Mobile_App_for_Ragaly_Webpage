@@ -67,6 +67,7 @@ class RagalyApp(MDApp):
             - to refresh button (if no internet when app started) and 
             - to Clock cikle
         """
+        self.posts = []
         grids = ["grid_banner", "grid_banner_2"]
         for grd in grids:
             grid = self.root.ids[grd]
@@ -102,8 +103,7 @@ class RagalyApp(MDApp):
             db = DB_questions()
             p_adr = db.get_post_name(p_parent)
             p_adr = "https://ragaly.hu/" + str(p_adr)
-            # print(p_adr)
-            p_tit_adr = "[ref=" + p_adr + "][b]" + p_title + "[/b][/ref]"
+            p_tit_adr = "[ref=" + p_adr + "][b]" + p_title[0:33] + "[/b][/ref]"
         self.root.ids["scr2_post_title"].text = p_tit_adr
         self.root.ids["button_mn"].title = p_tit_adr
 
@@ -125,10 +125,8 @@ class RagalyApp(MDApp):
         for i in range(0,link_long,1):
             link_id = "link" + str(i)
             link_tit_adr = "[ref=" + links[i] + "][u]" + links[i] + "[/u][/ref]"
-            print(link_id, "link", link_tit_adr)
             self.root.ids[link_id].text = link_tit_adr
-
-        print(links, len(links))
+        # print(links, len(links))
         self.root.ids["post_scroll"].scroll_y = 1
         sm = self.root.ids.screen_manager
         sm.current = "scr_2"
@@ -166,19 +164,15 @@ class RagalyApp(MDApp):
             banner.value = i
             p_id = self.posts[i][0]
             p_title = str(self.posts[i][1])
-            # print("p_title: ", p_title)
             if len(p_title) >= 38:
                  p_title = p_title[0:38] + " ..."  # if the lenght of the title is too long
             p_parent = self.posts[i][2]
-            # print("p_parent: ", p_parent)
             p_date = self.posts[i][4].date()
             banner.ids["post_title"].text = p_title 
-            # print("p_date: ", p_date)
-            date_text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
+            # date_text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent) # diagnostic text
+            date_text = str(p_date)
             banner.ids["post_date"].text = date_text
-            # print("date_text: ", date_text)
             p_pict = self.posts[i][6]
-            # print("p_pict: ", p_pict)
             if p_pict != []:
                 banner.ids["post_image"].source = p_pict[0]
             else:
