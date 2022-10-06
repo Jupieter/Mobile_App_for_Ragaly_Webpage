@@ -1,5 +1,7 @@
 import os
 import datetime
+
+from pyparsing import Or
 print("import I. Ragaly")
 # from tkinter import Image
 os.environ['KIVY_NO_CONSOLELOG'] = '0'
@@ -17,6 +19,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel
 from kivy.uix.image import AsyncImage
+import datetime
 
 import requests
 import transform
@@ -56,6 +59,7 @@ class RagalyApp(MDApp):
         self.max_post = 0
         self.max_page = 0
         self.post_pos = 0
+        self.error = [[0,"Internet elérési probléma", 0, "Vagy nincs bekapcsolva a mobil WIFI \n vagy a weboldal nem elérhető",datetime.datetime(2017, 5, 20, 19, 0, 27),[],[]]]
         print("--init--   END")
     
     def re_fresh(self):
@@ -92,17 +96,18 @@ class RagalyApp(MDApp):
         """ Displays the posts. The headline is a clickable link."""
         # print("The Post", post_pk)
         p_title = self.posts[post_pk][1]
+        p_tit_adr = p_title
         if is_cnx_active(1) :
             p_parent = self.posts[post_pk][2]
             db = DB_questions()
             p_adr = db.get_post_name(p_parent)
             p_adr = "https://ragaly.hu/" + str(p_adr)
             # print(p_adr)
-
-        p_tit_adr = "[ref=" + p_adr + "][b]" + p_title + "[/b][/ref]"
-        p_text = self.posts[post_pk][3]
+            p_tit_adr = "[ref=" + p_adr + "][b]" + p_title + "[/b][/ref]"
         self.root.ids["scr2_post_title"].text = p_tit_adr
         self.root.ids["button_mn"].title = p_tit_adr
+
+        p_text = self.posts[post_pk][3]
         self.root.ids["scr2_post"].text = p_text
         p_pict = self.posts[post_pk][6]
         if p_pict != []:
@@ -146,25 +151,40 @@ class RagalyApp(MDApp):
                 p_max = self.max_page
                 grid = self.root.ids["grid_banner_2"]
                 self.posts.extend(tp)
-            for i in range(p_min, p_max, 1):
-                card_id = "post" + str(i)
-                banner = PostCard()
-                banner.id= card_id
-                banner.value = i
-                p_id = self.posts[i][0]
-                p_title = str(self.posts[i][1])
-                if len(p_title) >= 38:
-                     p_title = p_title[0:38] + " ..."  # if the lenght of the title is too long
-                p_parent = self.posts[i][2]
-                p_date = self.posts[i][4].date()
-                banner.ids["post_title"].text = p_title 
-                banner.ids["post_date"].text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
-                p_pict = self.posts[i][6]
-                if p_pict != []:
-                    banner.ids["post_image"].source = p_pict[0]
-                else:
-                    banner.ids["post_image"].source = "images/no-image.jpg"
-                grid.add_widget(banner)
+        print("self.posts", self.posts)
+        if self.posts == [] or self.posts == self.error:
+            self.posts = self.error
+            p_min = 0
+            p_max = 1
+            grid = self.root.ids["grid_banner"]
+        print("self.posts", self.posts)
+        for i in range(p_min, p_max, 1):
+            print("i: ", i)
+            card_id = "post" + str(i)
+            banner = PostCard()
+            banner.id= card_id
+            banner.value = i
+            p_id = self.posts[i][0]
+            p_title = str(self.posts[i][1])
+            # print("p_title: ", p_title)
+            if len(p_title) >= 38:
+                 p_title = p_title[0:38] + " ..."  # if the lenght of the title is too long
+            p_parent = self.posts[i][2]
+            # print("p_parent: ", p_parent)
+            p_date = self.posts[i][4].date()
+            banner.ids["post_title"].text = p_title 
+            # print("p_date: ", p_date)
+            date_text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
+            banner.ids["post_date"].text = date_text
+            # print("date_text: ", date_text)
+            p_pict = self.posts[i][6]
+            # print("p_pict: ", p_pict)
+            if p_pict != []:
+                banner.ids["post_image"].source = p_pict[0]
+            else:
+                banner.ids["post_image"].source = "images/no-image.jpg"
+            print(banner)
+            grid.add_widget(banner)
 
 
     def on_start(self):
