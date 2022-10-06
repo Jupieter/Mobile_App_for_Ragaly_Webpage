@@ -1,7 +1,7 @@
 import os
 import datetime
 
-from pyparsing import Or
+
 print("import I. Ragaly")
 # from tkinter import Image
 os.environ['KIVY_NO_CONSOLELOG'] = '0'
