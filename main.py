@@ -149,23 +149,21 @@ class RagalyApp(MDApp):
                 p_max = self.max_page
                 grid = self.root.ids["grid_banner_2"]
                 self.posts.extend(tp)
-        print("self.posts", self.posts)
         if self.posts == [] or self.posts == self.error:
             self.posts = self.error
             p_min = 0
             p_max = 1
             grid = self.root.ids["grid_banner"]
-        print("self.posts", self.posts)
         for i in range(p_min, p_max, 1):
             print("i: ", i)
             card_id = "post" + str(i)
             banner = PostCard()
             banner.id= card_id
             banner.value = i
-            p_id = self.posts[i][0]
             p_title = str(self.posts[i][1])
             if len(p_title) >= 38:
                  p_title = p_title[0:38] + " ..."  # if the lenght of the title is too long
+            p_id = self.posts[i][0]
             p_parent = self.posts[i][2]
             p_date = self.posts[i][4].date()
             banner.ids["post_title"].text = p_title 
@@ -177,7 +175,6 @@ class RagalyApp(MDApp):
                 banner.ids["post_image"].source = p_pict[0]
             else:
                 banner.ids["post_image"].source = "images/no-image.jpg"
-            print(banner)
             grid.add_widget(banner)
 
 
