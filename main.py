@@ -134,48 +134,45 @@ class RagalyApp(MDApp):
             get_db = DB_questions()
             p, max_p = get_db.runner(post_page)                 # All last revisioned post/page
             tp = transform.transform(p) 
-        if post_page == "post":
-            p_min = 0
-            self.max_post = max_p
-            p_max = self.max_post
-            grid = self.root.ids["grid_banner"]
-            self.posts = tp
-        elif post_page == "page":
-            p_min = self.max_post + 1
-            self.max_page = self.max_post + max_p
-            p_max = self.max_page
-            grid = self.root.ids["grid_banner_2"]
-            self.posts.extend(tp)
-            # print(self.posts)
-        # print("min post: ", p_min, "max post: ",  p_max)
-        for i in range(p_min, p_max, 1):
-            card_id = "post" + str(i)
-            banner = PostCard()
-            banner.id= card_id
-            banner.value = i
-            p_id = self.posts[i][0]
-            p_title = str(self.posts[i][1])
-            if len(p_title) >= 38:
-                 p_title = p_title[0:38] + " ..."  # if the lenght of the title is too long
-            p_parent = self.posts[i][2]
-            p_date = self.posts[i][4].date()
-            banner.ids["post_title"].text = p_title 
-            banner.ids["post_date"].text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
-            p_pict = self.posts[i][6]
-            if p_pict != []:
-                # print(p_pict[0])
-                # print(banner.ids["post_image"].source)
-                banner.ids["post_image"].source = p_pict[0]
-            else:
-                banner.ids["post_image"].source = "images/no-image.jpg"
-            grid.add_widget(banner)
+            if post_page == "post":
+                p_min = 0
+                self.max_post = max_p
+                p_max = self.max_post
+                grid = self.root.ids["grid_banner"]
+                self.posts = tp
+            elif post_page == "page":
+                p_min = self.max_post + 1
+                self.max_page = self.max_post + max_p
+                p_max = self.max_page
+                grid = self.root.ids["grid_banner_2"]
+                self.posts.extend(tp)
+            for i in range(p_min, p_max, 1):
+                card_id = "post" + str(i)
+                banner = PostCard()
+                banner.id= card_id
+                banner.value = i
+                p_id = self.posts[i][0]
+                p_title = str(self.posts[i][1])
+                if len(p_title) >= 38:
+                     p_title = p_title[0:38] + " ..."  # if the lenght of the title is too long
+                p_parent = self.posts[i][2]
+                p_date = self.posts[i][4].date()
+                banner.ids["post_title"].text = p_title 
+                banner.ids["post_date"].text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent)
+                p_pict = self.posts[i][6]
+                if p_pict != []:
+                    banner.ids["post_image"].source = p_pict[0]
+                else:
+                    banner.ids["post_image"].source = "images/no-image.jpg"
+                grid.add_widget(banner)
 
 
     def on_start(self):
         print("on_start ragaly                START")
         self.post_news("post")
         self.post_news("page")
-        # self.get_sql_data("post")
+
+            
         self.root.ids.scr4_box.add_widget(MadeByBox()) 
         from kivy import platform
         from service.main import start_service
