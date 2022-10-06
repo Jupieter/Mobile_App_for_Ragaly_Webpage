@@ -27,7 +27,7 @@ def transform(posts):
         bolded = soap.strong_murkup(html_data)  # change <strong> to [b]
         html_txt = soap.text_find(bolded)  
         post[3] = html_txt
-        print(i, "-------------------- text find ---------------------------" , post[0], post[1], post[2], post[5])
+        print(i, "-------------------- text find ---------------------------" , post[0], post[1], post[2])
         # print( post[5])
         # print("html_txt ", i,": ", html_txt)
         i += 1

@@ -120,9 +120,10 @@ class RagalyApp(MDApp):
         for i in range(0,link_long,1):
             link_id = "link" + str(i)
             link_tit_adr = "[ref=" + links[i] + "][u]" + links[i] + "[/u][/ref]"
-            print("link", link_id)
+            print(link_id, "link", link_tit_adr)
             self.root.ids[link_id].text = link_tit_adr
 
+        print(links, len(links))
         self.root.ids["post_scroll"].scroll_y = 1
         sm = self.root.ids.screen_manager
         sm.current = "scr_2"
@@ -186,24 +187,9 @@ class RagalyApp(MDApp):
 
     def build(self):
         print('Build Ragaly')
-        # self.theme_cls.theme_style = "Light"
-        # print("light")
-        # self.theme_cls.primary_palette = "Blue"  # "Purple", "Red"
-        # print("Blue")
-
         return Builder.load_file('kv/main.kv')
     
-    # @staticmethod
-    # def start_service():
-    #     from jnius import autoclass
-    #     print("1")
-    #     service = autoclass("org.jupieter.ragaly_news.ServiceRagaly")
-    #     print("2")
-    #     mActivity = autoclass("org.kivy.android.PythonActivity").mActivity
-    #     print("3")
-    #     service.start(mActivity, "")
-    #     print("4")
-    #     return service
+
 
 if __name__ == '__main__':
     print('START MAIN RAGALY')
