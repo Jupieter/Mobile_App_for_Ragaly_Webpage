@@ -47,6 +47,22 @@ class DB_questions():
         cur.execute(sql, params)
         parent_result = cur.fetchall()
         cur.close()
+    elif post_page == "page":
+      con = self.db_get() 
+      if con:
+        cur = con.cursor()
+        sql = """
+          SELECT wragalyp_posts.ID
+          FROM wragalyp_posts 
+          INNER JOIN wragaly_mobilapp_scr3
+          ON wragalyp_posts.ID = wragaly_mobilapp_scr3.page_scr3 
+          WHERE wragalyp_posts.post_status = "publish" 
+          ORDER BY wragalyp_posts.ID DESC
+        """
+        params = {'categorie': (1,33,34)}
+        cur.execute(sql, params)
+        parent_result = cur.fetchall()
+        cur.close()
     else:
       # parent_result = tuple(306, 303)
       parent_result = ((10209,), (10205,), (10201,), (390,), (384,), (312,), (303,))
@@ -145,7 +161,7 @@ class DB_questions():
 
 
 
-  def runner(self, post_page = "post"):
+  def runner(self, post_page = "page"):
     ''' main query chain'''
     parent_result = self.post_parent(post_page)
     # print("parent_result:  ", parent_result)
