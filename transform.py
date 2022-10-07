@@ -8,7 +8,7 @@ def transform(posts):
         # if i > teszt_db: break
         html_data = post[3] 
         # print(post[1])                # post contetnt in html formatted string
-        # print(post[3])                # post contetnt in html formatted string
+        print(post[3])                # post contetnt in html formatted string
         links = soap.link_find(html_data)   # find all links in html formatted text and return in a list
         # print(i, "post links: ", links )
         post.append(links)                   # pictures added to list item-5
@@ -38,6 +38,6 @@ if __name__ == '__main__':
     print('START TRANSFORM')
     teszt_db = 40
     get_db = DB_questions()
-    posts, max_post = get_db.runner()                 # All last revisioned post
+    posts, max_post = get_db.runner("page")                 # All last revisioned post
     transform(posts) 
 

@@ -67,6 +67,7 @@ class DB_questions():
       cur.execute(sql, params)
       inherits_result = cur.fetchall()
       cur.close()
+      print(inherits_result)
       return inherits_result
 
   def post_last(self, inherits_result):
@@ -80,6 +81,7 @@ class DB_questions():
         if post_title != inh[1]:
           post_title = inh[1]
           last_post_list.append(inh[0])
+      print(last_post_list)
       return last_post_list
 
   def post_data(self, last_post_list): 

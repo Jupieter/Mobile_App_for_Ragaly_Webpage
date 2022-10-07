@@ -12,13 +12,15 @@ def test_transform():
         <p><a href="http://adress.hu/wp-content/uploads/2020/09/Plakat_2021-2.jpg">
         <img class="size-large wp-image-42622 aligncenter" 
         src="http://adress.hu/wp-content/uploads/2020/09/Plakat_2021-2-714x1024.jpg" 
-        alt="" width="676" height="970" /></a></p>''',
+        alt="" width="676" height="970" /></a></p>
+        <li><a title="http://www.krhdlhaluka.sk/" href="http://www.krhdlhaluka.sk/" target="_blank" rel="noopener noreferrer">http://www.krhdlhaluka.sk/</a></li>
+        ''',
          "2022-02-22 22:22:22"]
         ]
     post_out = [
-        [15, 'Post 1', 12, '[b]Hello World[/b]', '2017-07-10 16:32:05', []], 
-        [14, 'Post 2', 10, '\n[b]A versenyekről röviden[/b]\nNevezés:', '2022-02-22 22:22:22', []],
-        [13, 'Post 3', 8, '[b]JuPYther[/b]\n\n', '2022-02-22 22:22:22', ['http://adress.hu/wp-content/uploads/2020/09/Plakat_2021-2.jpg']]
+        [15, 'Post 1', 12, '[b]Hello World[/b]', '2017-07-10 16:32:05', [], []], 
+        [14, 'Post 2', 10, '\n[b]A versenyekről röviden[/b]\nNevezés:', '2022-02-22 22:22:22', [], []],
+        [13, 'Post 3', 8, '[b]JuPYther[/b]\n\n\nhttp://www.krhdlhaluka.sk/\n', '2022-02-22 22:22:22', ['http://adress.hu/wp-content/uploads/2020/09/Plakat_2021-2.jpg', 'http://www.krhdlhaluka.sk/'], ['http://adress.hu/wp-content/uploads/2020/09/Plakat_2021-2.jpg']]
         ]
     test2 = transform.transform(post_in)
     for i in test2:
