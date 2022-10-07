@@ -103,7 +103,7 @@ class RagalyApp(MDApp):
             db = DB_questions()
             p_adr = db.get_post_name(p_parent)
             p_adr = "https://ragaly.hu/" + str(p_adr)
-            p_tit_adr = "[ref=" + p_adr + "][b]" + p_title[0:33] + "[/b][/ref]"
+            p_tit_adr = "[ref=" + p_adr + "][b]" + p_title[0:25] + "[/b][/ref]"
         self.root.ids["scr2_post_title"].text = p_tit_adr
         self.root.ids["button_mn"].title = p_tit_adr
 
