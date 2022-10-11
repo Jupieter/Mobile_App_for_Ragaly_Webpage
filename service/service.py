@@ -37,9 +37,6 @@ def load_data():
         inherit_result = db.post_inherit(parent_result)
         last_post_list = db.post_last(inherit_result)
         max_id = max(last_post_list)
-        print(type(parent_result))
-        print(parent_result)
-        print(last_post_list)
     except:
         print('Problem with internet conection')
         max_id = None
@@ -48,15 +45,14 @@ def load_data():
 
 
 max_id = load_data()
-print("Coffeebar  service running.....", max_id)
+# print("Coffeebar  service running.....", max_id)
 if max_id:
     old_id = open_file()
     if max_id > old_id:
         post_title = db.get_post_title(max_id)
-        print("old id:  ", old_id, "requested id:  ", max_id, "Title: ", post_title)
+        # print("old id:  ", old_id, "requested id:  ", max_id, "Title: ", post_title)
         write_file(max_id)
         try: 
             an.notify(title='Ragály Önkormányzat új híre', message = post_title,  toast=False, app_icon='images/cimer.png')
-            print("yes")
         except:
             print("No work the notification")

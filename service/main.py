@@ -7,17 +7,13 @@ def start_service():
     mActivity = autoclass("org.kivy.android.PythonActivity").mActivity
     try:
         msg_service = autoclass("org.jupieter.ragaly_news.RagalyBroadcastService")
-        print("RagalyBroadcastService:  ", msg_service)
         try:
             msg_service.start(mActivity)
-            print("RagalyBroadcastService.started")
         except:
             print("NO   msg_service.start")
     except:
         print("NO   RagalyBroadcastService")
 
-
-    print("2 - start_service")
     service = autoclass("org.jupieter.ragaly_news.ServiceRagaly")
     service.start(mActivity, "")
     print("3 - end_service")
