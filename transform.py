@@ -5,31 +5,21 @@ import soap
 def transform(posts):
     i = 0
     for post in posts:
-        # if i > teszt_db: break
         html_data = post[3] 
-        # print(post[1])                # post contetnt in html formatted string
-        print(post[3])                # post contetnt in html formatted string
+        # print(post[3])                # post contetnt in html formatted string
         links = soap.link_find(html_data)   # find all links in html formatted text and return in a list
-        # print(i, "post links: ", links )
         post.append(links)                   # pictures added to list item-5
         pics = soap.pict_link(links)        # from link list slect all jpg link
-        # print(pics)
         post.append(pics)                   # pictures added to list item-5
-        # print(i, "--------------------- pictures --------------------------")
-        # print(post[0:2])
-        # print("pic: ",  post[5])
         i += 1
 
     i = 0
     for post in posts:
-        # if i > teszt_db: break
         html_data = post[3]                     # post contetnt in html formatted string
         bolded = soap.strong_murkup(html_data)  # change <strong> to [b]
         html_txt = soap.text_find(bolded)  
         post[3] = html_txt
-        print(i, "-------------------- text find ---------------------------" , post[0], post[1], post[2])
-        # print( post[5])
-        # print("html_txt ", i,": ", html_txt)
+        # print(i, "-------------------- text find ---------------------------" , post[0], post[1], post[2])
         i += 1
     
     return posts

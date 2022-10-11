@@ -11,6 +11,6 @@ class MadeByBox(MDCard):
 	
 	def __init__(self, **kwargs):
 		super(MadeByBox, self).__init__(**kwargs)
-	print('MadeByCard 0')
+		# print('MadeByCard 0')
 
 

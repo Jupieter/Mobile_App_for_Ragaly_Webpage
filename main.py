@@ -2,31 +2,23 @@ import os
 import datetime
 
 
-print("import I. Ragaly")
-# from tkinter import Image
 os.environ['KIVY_NO_CONSOLELOG'] = '0'
 cwd = os.getcwd()
-# print("cwd, ",cwd)
 os.environ['KIVY_HOME'] = cwd + '/conf'
-
 
 
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
-from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.card import MDCard
-from kivymd.uix.label import MDLabel
-from kivy.uix.image import AsyncImage
 import datetime
 
 import requests
 import transform
 from get_data import *
 from madeby import MadeByBox
-# from temp.picker import MDThemePicker
-print("import II. Ragaly")
+# print("import II. Ragaly")
 
 
 def is_cnx_active(timeout=1):
@@ -44,15 +36,13 @@ class PostCard(MDCard):
     
 
 class ContentNavigationDrawer(MDBoxLayout):
-    print("ContentNavigationDrawer")
     screen_manager = ObjectProperty()
     nav_drawer = ObjectProperty()
-    print("ContentNavigationDrawer   END")
+    # print("ContentNavigationDrawer   END")
 
 
 class RagalyApp(MDApp):
     def __init__(self, **kwargs):
-        print("--init--")
         super(RagalyApp, self).__init__(**kwargs)
         self.posts = []
         self.pagees = []
@@ -60,7 +50,6 @@ class RagalyApp(MDApp):
         self.max_page = 0
         self.post_pos = 0
         self.error = [[0,"Internet elérési probléma", 0, "Vagy nincs bekapcsolva a mobil WIFI \n vagy a weboldal nem elérhető",datetime.datetime(2017, 5, 20, 19, 0, 27),[],[]]]
-        print("--init--   END")
     
     def re_fresh(self):
         """used   
@@ -73,7 +62,6 @@ class RagalyApp(MDApp):
             grid = self.root.ids[grd]
             ch = []
             for child in grid.children:
-                print(child.id)
                 ch.append(child)
             for dt in ch:
               grid.remove_widget(dt)
@@ -95,7 +83,6 @@ class RagalyApp(MDApp):
     
     def id_post(self, post_pk):
         """ Displays the posts. The headline is a clickable link."""
-        # print("The Post", post_pk)
         p_title = self.posts[post_pk][1]
         p_tit_adr = p_title
         if is_cnx_active(1) :
@@ -126,7 +113,6 @@ class RagalyApp(MDApp):
             link_id = "link" + str(i)
             link_tit_adr = "[ref=" + links[i] + "][u]" + links[i] + "[/u][/ref]"
             self.root.ids[link_id].text = link_tit_adr
-        # print(links, len(links))
         self.root.ids["post_scroll"].scroll_y = 1
         sm = self.root.ids.screen_manager
         sm.current = "scr_2"
@@ -155,7 +141,6 @@ class RagalyApp(MDApp):
             p_max = 1
             grid = self.root.ids["grid_banner"]
         for i in range(p_min, p_max, 1):
-            print("i: ", i)
             card_id = "post" + str(i)
             banner = PostCard()
             banner.id= card_id
@@ -167,7 +152,6 @@ class RagalyApp(MDApp):
             p_parent = self.posts[i][2]
             p_date = self.posts[i][4].date()
             banner.ids["post_title"].text = p_title 
-            # date_text = str(i) + " : " + str(p_date)  + " : " + str(p_id)  + " : " + str(p_parent) # diagnostic text
             date_text = str(p_date)
             banner.ids["post_date"].text = date_text
             p_pict = self.posts[i][6]
@@ -179,7 +163,6 @@ class RagalyApp(MDApp):
 
 
     def on_start(self):
-        print("on_start ragaly                START")
         self.post_news("post")
         self.post_news("page")
 
@@ -194,7 +177,6 @@ class RagalyApp(MDApp):
 
 
     def build(self):
-        print('Build Ragaly')
         return Builder.load_file('kv/main.kv')
     
 
