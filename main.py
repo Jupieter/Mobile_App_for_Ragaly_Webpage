@@ -50,7 +50,7 @@ class RagalyApp(MDApp):
         self.max_post = 0
         self.max_page = 0
         self.post_pos = 0
-        self.error = [[0,"Internet elérési probléma", 0, "Vagy nincs bekapcsolva a mobil WIFI \n vagy a weboldal nem elérhető",datetime.datetime(2017, 5, 20, 19, 0, 27),[],[]]]
+        self.error = [[0,"Internet elérési probléma", 0, "Vagy nincs bekapcsolva a mobil WIFI \n vagy a weboldal nem elérhető",datetime.datetime(2022, 12, 12, 20, 22, 00),[],[]]]
     
     def re_fresh(self):
         """used   
@@ -86,14 +86,16 @@ class RagalyApp(MDApp):
         """ Displays the posts. The headline is a clickable link."""
         p_title = self.posts[post_pk][1]
         p_tit_adr = p_title
+        p_tit_adr_short = p_title
         if is_cnx_active(1) :
             p_parent = self.posts[post_pk][2]
             db = DB_questions()
             p_adr = db.get_post_name(p_parent)
             p_adr = "https://ragaly.hu/" + str(p_adr)
-            p_tit_adr = "[ref=" + p_adr + "][b]" + p_title[0:25] + "[/b][/ref]"
+            p_tit_adr = "[ref=" + p_adr + "][b]" + p_title + "[/b][/ref]"
+            p_tit_adr_short = "[ref=" + p_adr + "][b]" + p_title[0:25] + "[/b][/ref]"
         self.root.ids["scr2_post_title"].text = p_tit_adr
-        self.root.ids["button_mn"].title = p_tit_adr
+        self.root.ids["button_mn"].title = p_tit_adr_short
 
         p_text = self.posts[post_pk][3]
         self.root.ids["scr2_post"].text = p_text
@@ -169,12 +171,12 @@ class RagalyApp(MDApp):
 
             
         self.root.ids.scr4_box.add_widget(MadeByBox()) 
-        scroll_heigt = int(((Window.height - 60) / Window.height)*100)/100
+        scroll_heigt = int(((Window.height - 62) / Window.height)*100)/100
         print(Window.size)
         self.root.ids.post_scroll_1.size_hint_y = scroll_heigt
         self.root.ids.post_scroll_3.size_hint_y = scroll_heigt
         self.root.ids.post_scroll_2.size_hint_y = int(((Window.height - 140) / Window.height)*100)/100
-        self.root.ids.scr2_post_title.pos_y = (Window.height - 140)
+        self.root.ids.scr2_post_title.pos = (Window.width * 0.05), (int(Window.height/2) - 98)
         self.root.ids.scr4_box.size_hint_y = int(((Window.height - 160) / Window.height)*100)/100
         from kivy import platform
         from service.main import start_service
