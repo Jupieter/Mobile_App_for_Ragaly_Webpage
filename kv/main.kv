@@ -6,6 +6,7 @@
 
 
 
+
 <PostCard>
     # id: post_card
     on_pre_enter: 
@@ -81,6 +82,9 @@
             OneLineListItem:
                 text: "Open Source THX:"
                 on_press:
+                    print(Window.width, (Window.height-100)/Window.height)
+                    print(root.size)
+                    print(self.size)
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "scr_4"
                     app.ch_title("Open Source THX")
@@ -91,6 +95,7 @@
 
 MDScreen:
     id: main_scr
+    
 
     MDTopAppBar:
         id: toolbar
@@ -111,11 +116,10 @@ MDScreen:
             MDScreen:
                 name: "scr_1"
                 ScrollView:
-                    id: post_scroll 
-                    pos_hint: {"center_x": 0.5, "top": 0.91}
-                    size_hint_y: 0.84
+                    id: post_scroll_1
                     do_scroll_x: False
                     do_scroll_y: True
+                    
                     GridLayout:
                         id: grid_banner
                         cols: 1
@@ -136,8 +140,8 @@ MDScreen:
                 MDLabel:
                     id: scr2_post_title
                     markup: True
-                    size: root.width * 0.86, root.height * 0.11
-                    pos: self.width * 0.01  , root.height * 0.36
+                    size: root.width * 0.86, 80 # root.height * 0.11
+                    #pos: 0  , root.height * 0.38
                     font_size: 0.025 * root.height
                     halign: "center"
                     text: "Post Title"
@@ -146,9 +150,9 @@ MDScreen:
                         webbrowser.open(args[1])
 
                 ScrollView:
-                    id: post_scroll 
-                    pos_hint: {"center_x": 0.5, "top": 0.83}
-                    size_hint_y: 0.77
+                    id: post_scroll_2
+                    # pos_hint: {"center_x": 0.5, "top": 0.85}
+                    # size_hint_y: 0.77
                     do_scroll_x: False
                     do_scroll_y: True
                     scroll_y: 1
@@ -173,6 +177,7 @@ MDScreen:
                             # pos_hint: {'center_x': .5, "top": 0.85}
                             # size: "80dp", "160dp"
                             source: "images/cimer.jpg"
+                            
                         MDLabel:
                             id: scr2_post
                             markup: True
@@ -220,9 +225,7 @@ MDScreen:
             MDScreen:
                 name: "scr_3"
                 ScrollView:
-                    id: page_scroll 
-                    pos_hint: {"center_x": 0.5, "top": 0.91}
-                    size_hint_y: 0.84
+                    id: post_scroll_3
                     do_scroll_x: False
                     do_scroll_y: True
                     GridLayout:
@@ -244,7 +247,7 @@ MDScreen:
                     id: scr4_box
                     orientation: "vertical"
                     pos_hint: {"center_x": .5, "center_y": .5}
-                    size_hint: 0.95, 0.8                
+                    size_hint_x: 0.95              
 
 
 

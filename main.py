@@ -18,6 +18,7 @@ import requests
 import transform
 from get_data import *
 from madeby import MadeByBox
+from kivy.core.window import Window
 # print("import II. Ragaly")
 
 
@@ -113,7 +114,7 @@ class RagalyApp(MDApp):
             link_id = "link" + str(i)
             link_tit_adr = "[ref=" + links[i] + "][u]" + links[i] + "[/u][/ref]"
             self.root.ids[link_id].text = link_tit_adr
-        self.root.ids["post_scroll"].scroll_y = 1
+        self.root.ids["post_scroll_2"].scroll_y = 1
         sm = self.root.ids.screen_manager
         sm.current = "scr_2"
     
@@ -168,6 +169,13 @@ class RagalyApp(MDApp):
 
             
         self.root.ids.scr4_box.add_widget(MadeByBox()) 
+        scroll_heigt = int(((Window.height - 60) / Window.height)*100)/100
+        print(Window.size)
+        self.root.ids.post_scroll_1.size_hint_y = scroll_heigt
+        self.root.ids.post_scroll_3.size_hint_y = scroll_heigt
+        self.root.ids.post_scroll_2.size_hint_y = int(((Window.height - 140) / Window.height)*100)/100
+        self.root.ids.scr2_post_title.pos_y = (Window.height - 140)
+        self.root.ids.scr4_box.size_hint_y = int(((Window.height - 160) / Window.height)*100)/100
         from kivy import platform
         from service.main import start_service
         if platform == "android":
