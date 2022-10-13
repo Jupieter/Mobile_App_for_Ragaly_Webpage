@@ -180,7 +180,7 @@ class RagalyApp(MDApp):
         self.root.ids.post_scroll_3.size_hint_y = scroll_heigt
         self.root.ids.post_scroll_2.size_hint_y = int(((Window.height - 2 * hgt) / Window.height)*100)/100
         self.root.ids.scr2_post_title.pos = (Window.width * 0.05), (int(Window.height/2) - 1.5 * hgt)
-        self.root.ids.scr4_box.size_hint_y = int(((Window.height - 2.4 * hgt) / Window.height)*100)/100
+        self.root.ids.scr4_box.size_hint_y = int(((Window.height - 2 * hgt) / Window.height)*100)/100
         from kivy import platform
         from service.main import start_service
         if platform == "android":
