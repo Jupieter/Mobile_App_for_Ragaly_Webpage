@@ -12,6 +12,8 @@ from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.card import MDCard
+from kivymd.uix.toolbar import MDTopAppBar
+from kivy.metrics import dp
 import datetime
 
 import requests
@@ -172,7 +174,8 @@ class RagalyApp(MDApp):
             
         self.root.ids.scr4_box.add_widget(MadeByBox()) 
         scroll_heigt = int(((Window.height - 62) / Window.height)*100)/100
-        print(Window.size)
+        ght = dp(64)
+        print(Window.size, "ght", ght)
         self.root.ids.post_scroll_1.size_hint_y = scroll_heigt
         self.root.ids.post_scroll_3.size_hint_y = scroll_heigt
         self.root.ids.post_scroll_2.size_hint_y = int(((Window.height - 140) / Window.height)*100)/100
