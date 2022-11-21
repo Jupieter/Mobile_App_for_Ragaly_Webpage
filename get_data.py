@@ -14,8 +14,8 @@ class DB_questions():
       con = pymysql.connect(
          host="ragaly.hu", # 212.92.23.152
          port=3306,
-         user="appfejleszt", 
-         passwd="nNe4rF#pH7gRQ", 
+         user="", 
+         passwd="", 
          database="ngwpragaly")
     except:
         con = None
