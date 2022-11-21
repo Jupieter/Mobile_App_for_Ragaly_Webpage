@@ -14,7 +14,7 @@ class DB_questions():
       con = pymysql.connect(
          host="ragaly.hu", # 212.92.23.152
          port=3306,
-         user="", 
+         user="", # User and Password have been removed before the repository will becomes Public.
          passwd="", 
          database="ngwpragaly")
     except:
