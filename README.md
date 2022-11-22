@@ -1,8 +1,7 @@
 # Ragaly
-![kivy_226](https://user-images.githubusercontent.com/63549139/203009149-b25410ca-f166-48d4-8d8d-8c72b2fc2ef1.png) 
 <h1 align="center"> Local government news query android application. </h1> 
 <h3>There are written in kivy-python. 
-    <img src="https://user-images.githubusercontent.com/63549139/203009149-b25410ca-f166-48d4-8d8d-8c72b2fc2ef1.png" alt="KivyMD" style="float:rigth;width:42px;height:42px;">
+    <img src="https://user-images.githubusercontent.com/63549139/203009149-b25410ca-f166-48d4-8d8d-8c72b2fc2ef1.png" alt="KivyMD" style="float:rigth;width:80px;height:80px;">
 </h3>
 
 
